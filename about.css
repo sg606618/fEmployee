@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: white;
+}
+/* Body Container */
+.container{
+    width: 100%;
+    height: 100%;
+}
+.about-us{
+    margin: 20px 0;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.social-media{
+    display: flex;
+    justify-content: flex-end;
+    font-size: clamp(10px, 5vw, 30px);
+    margin-right: 10%;
+}
+span:first-child{
+    margin-right: 2vw;
+}
+.socialMedia{
+    max-width: 30px;
+    height: 100%;
+    cursor: pointer;
+    margin-inline: 1rem;
+}
+.socialMedia:hover{
+    transform: scale(1.2);
+}
+
+
+/* last content */
+.content{
+    display: grid;
+    gap: 15px;
+    padding: 2% 10% 2% 5%;
+    grid-template-columns: repeat(auto-fit,minmax(1fr));
+}
+.last-content{
+    /* border: 3px solid grey;
+    box-shadow: 3px 3px 3px black; */
+    background: white;
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+.description{
+    display: flex;
+    justify-content: space-between;
+}
+p{
+    margin: 0 10px;
+    text-align: justify;
+    font-weight: 500;
+    font-size: clamp(12px, 3vw, 20px);
+}
+h3{
+    color: green;
+    background: rgba(4, 87, 87, .3);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: clamp(16px, 4vw, 30px);
+}
+
+#back_sign{
+    position: absolute;
+    margin-top: 20px;
+    left: 9%;
+    width: clamp(20px, 4vw, 30px);
+    cursor: pointer;
+    transition-duration: 1s;
+}
+#back_sign:hover{
+    left: 8%;
+}

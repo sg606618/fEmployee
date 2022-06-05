@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+.content{
+    background: white;
+    padding: 10px 20px;
+    border: 2px solid black;
+}
+h2{
+    font-size: clamp(16px, 4vw, 25px);
+    text-decoration: underline;
+    color: green;
+    margin-bottom: 10px;
+}
+h4{
+    font-size: clamp(12px, 3vw, 16px);
+}
+p{
+    font-size: clamp(11px, 3vw, 15px);
+    float: right;
+    margin-bottom: 10px;
+}
+small{
+    color: grey;
+}
+h1{
+    font-size: clamp(18px, 4vw, 30px);
+    text-decoration: dotted;
+    text-align: center;
+    margin-top: 20px;
+}
+hr{
+    border: 2px solid black;
+    width: 50%;
+    margin: auto;
+}
