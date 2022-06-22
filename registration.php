@@ -27,6 +27,23 @@
         $pass = $_POST['password'];
         $repassword = $_POST['repassword'];
 
+            
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            // echo "File ". $_FILES['image']['name'] ." uploaded successfully.\n";
+            // echo "Displaying contents\n";
+            // readfile($_FILES['image']['tmp_name']);
+         } else {
+            echo "<script>alert('You have to include your profile photo to continue ...');</script>";
+            ?>
+            <script>
+                location.replace("registration.html");
+            </script>
+            <?php
+            // header("location: registration.html");
+            // echo "filename '". $_FILES['image']['tmp_name'] . "'.";
+         }
+
+
         $sqls = "SELECT * FROM `registration` where Email = '$email'";
         $result = mysqli_query($conn, $sqls);
         
@@ -43,11 +60,16 @@
         $num = mysqli_num_rows($res);
 
         if($num > 0){
-            while($row = mysqli_fetch_assoc($res)){
+            while($row = mysqli_fetch_assoc($result)){
                 if($numb > 0){
                     while($rows = mysqli_fetch_assoc($res)){
                         if($email == $row['Email']){
-                            die ("Already exist , Try another email...");
+                            echo ("<script>alert('Already exist , Try another email...');</script>");
+                            ?>
+                            <script>
+                                location.replace("registration.html");
+                            </script>
+                            <?php
                         }else{
                             goto a;
                         }
@@ -63,23 +85,35 @@
             $destfile = 'imagefolder/'. $filename;
             // echo $destfile;
             move_uploaded_file($filepath, $destfile);
-            if(!($fname == '' || $lname == '' || $add == '' || $skill == '' || $exp == '' || $lang == '' || $work == '' || $desc == '' || $email == '' || $pass == '' || $phone == '')){
-                if($pass == $repassword){
-                    $sql = "INSERT INTO `registration` (`Name`, `Address`, `Gender`, `Skill`, `Phone`, `Experience`, `Working Hours`, `Language`, `Description`, `Photo`, `Email`, `Password`) VALUES ('$fname $lname', '$add', '$gen', '$skill', '$phone', '$exp', '$work', '$lang', '$desc', '$destfile', '$email', '$hash_pass')";
-                    $result = mysqli_query($conn, $sql);
-                    if($result){
-                        echo "inserted";
-                        header("location: login.php");
+
+
+                if(!($fname == '' || $lname == '' || $add == '' || $skill == '' || $exp == '' || $lang == '' || $work == '' || $desc == '' || $email == '' || $pass == '' || $phone == '')){
+                    if($pass == $repassword){
+                        $sql = "INSERT INTO `registration` (`Name`, `Address`, `Gender`, `Skill`, `Phone`, `Experience`, `Working Hours`, `Language`, `Description`, `Photo`, `Email`, `Password`) VALUES ('$fname $lname', '$add', '$gen', '$skill', '$phone', '$exp', '$work', '$lang', '$desc', '$destfile', '$email', '$hash_pass')";
+                        $result = mysqli_query($conn, $sql);
+                        if($result){
+                            echo "inserted";
+                            header("location: login.php");
+                        }else{
+                            echo "Not inserted ";
+                        }
                     }else{
-                        echo "Not inserted ";
+                        echo ("<script>alert('Password must match each other...');</script>");
+                        ?>
+                        <script>
+                            location.replace("registration.html");
+                        </script>
+                        <?php
                     }
                 }else{
-                    die("Password must match each other...");
+                    echo("<script>alert('Please fill all the boxes and try again....');</script>");
+                    ?>
+                    <script>
+                        location.replace("registration.html");
+                    </script>
+                    <?php
                 }
-            }else{
-                die ("Please fill all the boxes and try again....");
             }
         }
-    }
     mysqli_close($conn);
 ?>

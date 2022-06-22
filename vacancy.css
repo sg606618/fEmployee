@@ -28,18 +28,9 @@
 }
 
 
-/* Container field */
-.container1{
-    padding: 10px 8%;
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
-    /* color: darkgreen; */
-    margin-bottom: 50px;
-}
 
 /* search button */
-/* #searchBox{
+#searchBox{
     display: block;
     height: 40px;
     width: 50%;
@@ -69,15 +60,25 @@
 }
 #search-icon:hover{
     background: rgb(233, 192, 121);
-} */
+}
 .find{
+    text-align: center;
     text-decoration: underline;
     font-size: clamp(14px, 4vw, 30px);
 }
-.search-bar{
+.search-bar form{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     padding: 20px;
+}
+
+/* Container field */
+.container1{
+    padding: 10px 8%;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    margin-bottom: 50px;
 }
 
 /* Content Section */
@@ -88,7 +89,7 @@
     box-shadow: 5px 5px 10px black;
     background: rgba(10, 100, 80, .8);
     margin: 40px 0;
-    width: 100%;
+    width: 22rem;
     color: white;
 }
 .content:nth-child(even){
@@ -165,6 +166,14 @@ textarea{
 }
 
 /* media section */
+@media (max-width: 600px){
+    .container1{
+        place-items: center;
+    }
+    .bidWrapper .user{
+        grid-column: 1;
+    }
+}
 @media (max-width: 400px){
     .container1{
         grid-template-columns: repeat(auto-fit,minmax(160px,1fr));

@@ -28,7 +28,7 @@ a{
     box-shadow: 6px 4px 2px burlywood;
     padding: 0px;
     height: min-content;
-    font-size: clamp(14px, 5vw, 20px);
+    font-size: clamp(14px, 5vw, 25px);
 }
 #logo:hover{
     box-shadow: 7px 5px 3px rgb(223, 180, 124);
@@ -104,6 +104,7 @@ ul li{
 }
 #contact_btn:hover, nav ul li:hover, header ul li:hover{
     opacity: .7;
+    transform: scale(1.1);
 }
 nav ul li a.focus:link, nav ul li a.focus:visited{
     color:blue;

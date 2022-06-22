@@ -13,6 +13,7 @@
 }
 #output{
     border-radius: 50%;
+    cursor: pointer;
 }
 .image-upload>input {
   display: none;
@@ -23,4 +24,7 @@ textarea{
 input[type="checkbox"]{
     margin-top: 6px;
     margin-right: 5px;
+}
+#regis{
+    text-decoration: underline;
 }

@@ -2,9 +2,9 @@
     session_start();
 
     echo "logging out !! ... Please wait ....";
-    session_unset();
+    // session_unset();
     session_destroy();
 
-    header("location: /College/index.php");
+    header("location: /femployee/index.php");
     exit;
 ?>

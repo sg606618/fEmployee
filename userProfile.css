@@ -1,6 +1,12 @@
+body{
+    background: rgba(20, 20, 20, .5);
+}
+
 /* The Navigation Bar */
 nav{
     display: flex;
+    flex-direction: row;
+    width: 50%;
     align-items: center;
     height: min-content;
 }
@@ -115,6 +121,9 @@ textarea{
 #inputFile[type="file"]{
     color: transparent;
 }
+.image-upload label img{
+    cursor: pointer;
+}
 .image-upload>input {
     display: none;
 }
@@ -123,6 +132,19 @@ textarea{
     height: 300px;
     margin-bottom: 20px;
     display: none;
+}
+#portImage{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 10px;
+    width: 100%;
+    height: fit-content;
+    place-items: center;
+}
+#portImage a > img{
+    height: 200px;
+    border-radius: 0px;
+    margin-bottom: 20px;
 }
 strong{
     font-size: clamp(14px ,3vw, 18px);
@@ -146,4 +168,101 @@ h1{
 }
 img{
     border-radius: 50%;
+}
+
+#option ol li{
+    list-style: none;
+    font-weight: 200;
+    margin: 10px 30px;
+    box-shadow: 1px 1px 1px 1px whitesmoke;
+    padding: 5px;
+}
+#option ol li:hover{
+    cursor: pointer;
+    font-weight: 300;
+    transform: scale(1.02);
+    box-shadow: 2px 2px 2px 2px whitesmoke;
+}
+#option {
+    display: flex;
+    flex-direction: column;
+    background: rgba(20, 20, 20, .9);
+    color: white;
+    justify-content: space-between;
+    height: fit-content;
+    visibility: hidden;
+    position: absolute;
+    right: 0%;
+    top: 1%;
+    z-index:20;
+}
+
+/* Content/Profile Editing of the User */
+.formWrapper{
+    background: url("images/employee.jfif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+    width: fit-content;
+    height: max-content;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0%;
+    right: 0%;
+    top: -100%;
+    z-index: 20;
+}
+.formWrapper h2{
+    text-decoration: underline;
+    margin-bottom: 10px;
+    color: green;
+}
+.formWrapper form label{
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], input[type="file"], input[type="password"], textarea{
+    outline: none;
+    padding: 12px 5px;
+    font-weight: bold;
+    font-size: clamp(13px, 4vw, 15px);
+    width: clamp(100px, 50vw, 300px);
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="number"], input[type="file"], input[type="password"]{
+    height: 10px;
+}
+input[type="file"]{
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+}
+input:focus, textarea:focus{
+    outline: 1px solid green;
+}
+textarea{
+    resize: none;
+    height: 100px;
+}
+
+input[type="submit"]{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 5px 10px;
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 600;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: lightblue;
+}
+input[type="submit"]:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    background: rgb(109, 193, 221);
 }

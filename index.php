@@ -41,22 +41,22 @@
         <h2 id="logo">fEmployee</h2>
         <ul>
             <?php
-            if($loggedin){
-                echo '<a href="logout.php">
-                <li id="startLogin" style="margin-left: -50%;">Logout</li>
-                </a>
-                <a href="individual.php">
-                <img src="' . $_SESSION["photo"] . '" style="border-radius: 50%;" id="profile2" alt="">
-                </a>';
-            }
-            if(!$loggedin){
-                echo '<a href="registration.html">
-                    <li  id="startSignup">Registration</li>
-                </a>
-                <a href="login.php">
-                    <li id="startLogin">Login</li>
-                </a>';
-            }
+                if($loggedin){
+                    echo '<a href="logout.php">
+                    <li id="startLogin" style="margin-left: -50%;">Logout</li>
+                    </a>
+                    <a href="userProfile.php">
+                    <img src="' . $_SESSION["photo"] . '" style="border-radius: 50%;" id="profile2" alt="">
+                    </a>';
+                }
+                if(!$loggedin){
+                    echo '<a href="registration.html">
+                        <li  id="startSignup">Registration</li>
+                    </a>
+                    <a href="login.php">
+                        <li id="startLogin">Login</li>
+                    </a>';
+                }
             ?>
         </ul>
     </header>
@@ -68,11 +68,7 @@
                 <img src="images/profile.png" id="profile2" alt="">
             </a> -->
             <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
+            <li><a href="vacancy.php">Find Vacancies</a></li>
             <li><a href="about.php">About</a></li>
         </ul>
         <a href="contact.php"><button id="contact_btn">Contact</button></a>
@@ -83,11 +79,7 @@
                 <img src="images/profile.png" id="profile1" alt="">
             </a> -->
             <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
+            <li><a href="vacancy.php">Find Vacancies</a></li>
             <li><a href="about.php">About</a></li>
             <li onclick="hideThreeLine()"><a>Exit</a></li>
         </ul>
@@ -132,80 +124,82 @@
         <div class="informations">
             <div class="information">
                 <?php 
-                    $sql = "SELECT * FROM registration ORDER BY `S.N.` DESC LIMIT 7";
+                    $sql = "SELECT * FROM registration ORDER BY `S.N.` DESC";
                     $result = mysqli_query($conn, $sql);
                     if(!$result){
                         die ("Error in Selecting Database , <br> Please check!!!");
                     }
 
                     $num = mysqli_num_rows($result);
-                    $row = mysqli_fetch_assoc($result);
+                    // $row = mysqli_fetch_assoc($result);
                     if($num > 0){
                         while($row = mysqli_fetch_assoc($result)){
-                            if (!($row['Name'] == '' || $row['Address'] == '')){
-                                if(!$loggedin){
-                                    echo '<div class="contentinfo">
-                                        <div class="info">
-                                        <div class="top_section">
-                                                <div class="image-icons">
+                            if(!$loggedin){
+                                echo '<div class="contentinfo">
+                                    <div class="info">
+                                    <div class="top_section">
+                                            <div class="image-icons">
+                                                <a href="individual.php?var='.$row['Email'].'">
                                                     <img src="' .$row["Photo"] .'" alt="images" onerror=' . 'this.src="images/profile.png";' . ' class="profile" />
-                                                    <section class="img-icon">
-                                                        <i class="fa fa-2x fa-github"></i>
-                                                        <i class="fa fa-2x fa-facebook-square"></i>
-                                                        <i class="fa fa-2x fa-twitter"></i>
-                                                    </section>
-                                                </div>
-                                                <div class="userInfo">
-                                                    <b style="margin-bottom: 10px; color: whitesmoke; font-size: 20px;">' .$row["Name"] .'</b>
-                                                    <b>' .$row["Skill"] .'</b>
-                                                    <b><small style="float: right;margin-top: 10px; color: white;">' .$row["Address"] .'</small></b>
-                                                </div>
+                                                </a>
+                                                <section class="img-icon">
+                                                    <i class="fa fa-2x fa-github"></i>
+                                                    <i class="fa fa-2x fa-facebook-square"></i>
+                                                    <i class="fa fa-2x fa-twitter"></i>
+                                                </section>
                                             </div>
-                                            <div class="description">
-                                                <textarea name="desc" id="desc" style="border: none;" disabled>' .$row["Description"]. '</textarea>
+                                            <div class="userInfo">
+                                                <b style="margin-bottom: 10px; color: whitesmoke; font-size: 20px;">' .$row["Name"] .'</b>
+                                                <b>' .$row["Skill"] .'</b>
+                                                <b><small style="float: right;margin-top: 10px; color: white;">' .$row["Address"] .'</small></b>
                                             </div>
-                                            <a id="msg" href="mailto: ' .$row["Email"] .'">
-                                                <input type="button" value="Direct Mail" id="message">
-                                            </a>
                                         </div>
-                                    </div>';
-                                }else{
-                                    $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC LIMIT 7";
-                                    $result = mysqli_query($conn, $sql);
-                                    if(!$result){
-                                        die ("Error in Selecting Database , <br> Please check!!!");
-                                    }
-                                    $num = mysqli_num_rows($result);
-                                    // echo $num;
-                                    if($num > 0){
-                                        while($row = mysqli_fetch_assoc($result)){
-                                            echo '<div class="vacancy_content" id="vacancy_content">
-                                                <div class="heading" id="heading">
-                                                    <h3 id="title">' . $row['Job Title'] . '</h3>
+                                        <div class="description">
+                                            <textarea name="desc" id="desc" style="border: none;" disabled>' .$row["Description"]. '</textarea>
+                                        </div>
+                                        <a id="msg" href="mailto: ' .$row["Email"] .'">
+                                            <input type="button" value="Direct Mail" id="message">
+                                        </a>
+                                    </div>
+                                </div>';
+                            }else{
+                                $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC";
+                                $result = mysqli_query($conn, $sql);
+                                if(!$result){
+                                    die ("Error in Selecting Database , <br> Please check!!!");
+                                }
+                                $num = mysqli_num_rows($result);
+                                // echo $num;
+                                if($num > 0){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        echo '<div class="vacancy_content" id="vacancy_content">
+                                            <div class="heading" id="heading">
+                                                <h3 id="title">' . $row['Job Title'] . '</h3>
+                                            </div>
+                                            <div class="parts">
+                                                <div class="part part1">
+                                                    <article>
+                                                        <span>' . $row['Company'] . '</span>
+                                                        <span>' . $row['Address'] . '</span>
+                                                        <span>' . $row['Email'] . '</span>
+                                                    </article>
                                                 </div>
-                                                <div class="parts">
-                                                    <div class="part part1">
-                                                        <article>
-                                                            <span>' . $row['Company'] . '</span>
-                                                            <span>' . $row['Address'] . '</span>
-                                                            <span>' . $row['Email'] . '</span>
-                                                        </article>
-                                                    </div>
-                                                    <div class="part part2">
-                                                        <article>
-                                                            <span>Opening Date:</span>
-                                                            <span>' . $row['Open Date'] . '</span>
-                                                            <span>Expiry Date:</span>
-                                                            <span>' . $row['Expiry Date'] . '</span>
-                                                        </article>
-                                                    </div>
+                                                <div class="part part2">
+                                                    <article>
+                                                        <span>Opening Date:</span>
+                                                        <span>' . $row['Open Date'] . '</span>
+                                                        <span>Expiry Date:</span>
+                                                        <span>' . $row['Expiry Date'] . '</span>
+                                                    </article>
                                                 </div>
-                                                <div class="vacancy_description">
-                                                    <textarea disabled name="description" id="description" rows="10" disabled>' . $row['Description'] . '</textarea>
-                                                </div>
-                                                <input type="button" id="vacancy_button" value="Enroll">
-                                            </div>';
-                                        }
+                                            </div>
+                                            <div class="vacancy_description">
+                                                <textarea disabled name="description" id="description" rows="10" disabled>' . $row['Description'] . '</textarea>
+                                            </div>
+                                            <a href="mailto: '.$row['Email'].'">
+                                                <input type="button" id="button" value="Contact">
+                                            </a>
+                                        </div>';
                                     }
                                 }
                             }

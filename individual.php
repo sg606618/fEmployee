@@ -1,8 +1,16 @@
 <?php include 'connectDatabase.php' ?>
-<?php session_start(); ?>
-
 <?php
-    if(isset($_SESSION['name'])){
+	$mail = $_GET['var'];
+	// echo $mail;
+	$sql = "select * from registration where `Email` = '$mail'";
+	$result = mysqli_query($conn, $sql);
+	if(!$result){
+		echo "error occur";
+	}
+	$num = mysqli_num_rows($result);
+	
+	if($num){
+		while($row = mysqli_fetch_assoc($result)){
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +20,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php echo $_SESSION['name']; ?> || fEmployee</title>
+	<title><?php echo $row['Name']; ?> || fEmployee</title>
 	<style><?php include "style.css" ?></style>
 	<style><?php include "terms.css" ?></style>
 	<style><?php include "individual.css" ?></style>
@@ -61,28 +69,28 @@
 		<div class="user">
 			<div class="userInfo">
 				<h1 class="userName">
-					<?php echo $_SESSION['name']; ?>
+					<?php echo $row['Name']; ?>
 				</h1>
 				<h4 class="skills">
-					<?php echo $_SESSION['skill']; ?>
+					<?php echo $row['Skill']; ?>
 				</h4>
 				<p class="userAddress">
-					<?php echo $_SESSION['address']; ?>
+					<?php echo $row['Address']; ?>
 				</p>
 				<small class="userDet">
-					<?php echo $_SESSION['email']; ?> ||
-					<?php echo $_SESSION['phone']; ?>
+					<?php echo $row['Email']; ?> ||
+					<?php echo $row['Phone']; ?>
 				</small>
 				<img class="star" src="images/star.png" alt="">
 			</div>
-			<img src="<?php echo $_SESSION['photo']; ?>" class="pro" alt="">
+			<img src="<?php echo $row['Photo']; ?>" onerror='this.src="images/profile.png";' class="pro" alt="">
 		</div>
 		<div class="description">
 			<label class="desc" for="desc">About</label>
-			<textarea name="desc" id="desc" disabled><?php echo $_SESSION['desc']; ?></textarea>
+			<textarea name="desc" id="desc" disabled><?php echo $row['Description']; ?></textarea>
 		</div>
 		<div class="userPortfolio">
-			<h3 class="portfolio">Portfolio</h3>
+			<h3 class="portfolio">Portfolio (ScreenShots)</h3>
 			<div class="portimg">
 				<img class="imgport" src="images/userPortfolio.jpg" alt="">
 				<img class="imgport" src="images/userPortfolio.jpg" alt="">
@@ -127,14 +135,12 @@
 			</p>
 		</div>
 	</div>
-
+	<?php 
+			}
+		}
+		mysqli_close($conn);
+	?>
+	
 </body>
-
-<?php   
-  }else{
-      echo "You are logged out";
-      header('location:login.php');
-  }
-?>
 
 </html>

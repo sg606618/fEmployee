@@ -28,21 +28,21 @@
             $_SESSION['desc'] = $row['Description'];
             $_SESSION['photo'] = $row['Photo'];
             $_SESSION['email'] = $row['Email'];
+            // $_SESSION['cash'] = $row['Cash'];
+            $_SESSION['password'] = $row['Password'];
+            $_SESSION['portfolio'] = $row['Portfolio'];
+            $_SESSION['link'] = $row['Link'];
 
             $pass_decode = password_verify($pass, $db_pass);
 
             if($pass_decode){
-                if(!($row['Name'] == '' || $row['Photo'] == '' || $row['Address'] == '')){
-                    header('location:index.php');
-                }else{
-                    header ('location:index.php');     
+                if(isset($_POST["remember"])) {
+                    setcookie ("email",$email,time()+86400);
+                    setcookie ("password",$pass,time()+86400);
+                    header ("location: index.php");
+                } else {
+                    header ("location: index.php");
                 }
-                ?>
-                <!-- <script>
-                    //  or you can do in javascript
-                    location.replace("index.php");
-                </script> -->
-                <?php
             }else{
                 echo "password incorrect";
             }
@@ -55,8 +55,6 @@
     }
     mysqli_close($conn);
 ?>
-
-
 
 <!doctype html>
 <html lang="en">
@@ -101,13 +99,23 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" name="email" id="form3Example3" class="form-control form-control-lg" placeholder="Enter a valid email address" />
+                            <input type="email" name="email" id="form3Example3" value="<?php 
+                                if(isset($_COOKIE["email"])) {
+                                    echo $_COOKIE["email"]; 
+                                } 
+                            ?>"
+                            class="form-control form-control-lg" placeholder="Enter a valid email address" />
                             <label class="form-label" for="form3Example3">Email address</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-3">
-                            <input type="password" name="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter password" />
+                            <input type="password" name="password" id="form3Example4" value="<?php
+                                if(isset($_COOKIE["password"])) {
+                                    echo $_COOKIE["password"]; 
+                                } 
+                            ?>"
+                            class="form-control form-control-lg" placeholder="Enter password" />
                             <label class="form-label" for="form3Example4">Password</label>
                         </div>
                         <div class="form-outline mb-3">
@@ -117,7 +125,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <!-- Checkbox -->
                             <div class="form-check mb-0">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                                <input class="form-check-input me-2" type="checkbox" name="remember" value="" id="form2Example3" />
                                 <label class="form-check-label" for="form2Example3">
                                     Remember me
                                 </label>

@@ -1,5 +1,13 @@
+<?php session_start(); ?>
 <?php include 'connectDatabase.php';?>
 
+<?php    
+    $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC";
+    $result = mysqli_query($conn, $sql);
+    if(!$result){
+        die ("Error in Selecting Database , <br> Please check!!!");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vacancies</title>
     <!-- <link rel="stylesheet" media="all" href="vacancy.css"> -->
-    <style>
-        <?php include 'vacancy.css'; ?>
-    </style>
+    <style><?php include 'vacancy.css'; ?></style>
     <link rel="stylesheet" media="all" href="terms.css">
 
     <!-- Google font awesome -->
@@ -21,28 +27,37 @@
 
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
-
+    <script>
+        function search(){
+            <?php
+                $search = $_POST['search'];
+                if(!$search == ''){
+                    $sql = "SELECT * FROM openvacancy WHERE `Job Title` LIKE '%$search%' ORDER BY `S.N.` DESC";
+                    $result = mysqli_query($conn, $sql);
+                    if(!$result){
+                        die ("Error in Selecting Database , <br> Please check!!!");
+                    }
+                }
+            ?>
+        }
+    </script>
 <body>
     <h2 id="logo">fEmployee</h2><hr>
+    <h2 class="find">Find Vacancies here !</h2>
     <div class="search-bar">
-        <a href="index.php">
-            <img src="images/back_button.png" alt="" id="back_sign">
-        </a>
-        <!-- <i class="fa fa-search fa-2x" id="search-icon"></i>
-        <input onkeyup="searchFilter()" type="text" name="search" placeholder="Search which skill you have ..." id="searchBox"> -->
-        <h2 class="find">Find Vacancies here !</h2>
+        <form onsubmit="search();" method="post">
+            <a href="index.php">
+                <img src="images/back_button.png" alt="" id="back_sign">
+            </a>
+            <input type="search" name="search" placeholder="Search which skill you have ..." id="searchBox">
+            <input type="submit" value="" name="submit" style="dipaly: none;">
+            <i class="fa fa-search fa-2x" id="search-icon"></i>
+        </form>
     </div>
     <hr>
     <div class="container1" id="container">
         <?php
-
-            $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC";
-            $result = mysqli_query($conn, $sql);
-            // $num = mysqli_num_rows($result);
-            // if($num >0 ){
-            //     $row = mysqli_fetch_assoc($result);
-            // }
-            if (mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($result)) {
                 while($row = mysqli_fetch_assoc($result)) {
                     ?>
                     <?php
@@ -70,18 +85,18 @@
                 <div class="description">
                     <textarea disabled name="description" id="description" rows="10" disabled>' . $row['Description'] . '</textarea>
                 </div>
-                <input type="button" id="button" value="Enroll">
+                <a href="mailto: '.$row['Email'].'">
+                    <input type="button" id="button" value="Contact">
+                </a>
             </div>';
             ?>
         <?php   
                 }
             } else {
-                echo "0 results";
+                echo "This work isn't available in this time !!! <br> Try this later...";
             }
             mysqli_close($conn);
         ?>
-        
-        
     </div>
     <hr>
     <div class="terms-conditions">

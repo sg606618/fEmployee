@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="registration.css">
 </head>
 
 <body class="bg-dark">
@@ -16,7 +16,7 @@
                 <div class="col-12 col-lg-9 col-xl-7">
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body bg-light p-4 p-md-5">
-                            <h3 class="mb-4 pb-2 pb-md-0 text-center mb-md-5">Registration Form</h3>
+                            <h3 id="regis" class="mb-4 pb-2 pb-md-0 text-center mb-md-5">Registration Form</h3>
                             <form action="registration.php" method="post" enctype="multipart/form-data">
                                 <section class="profile">
                                     <div class="image-upload">
@@ -172,32 +172,15 @@
     </script>
 
     <script>
-        function showPassword() {
-            var x = document.getElementById('password');
-            var y = document.getElementById('repassword');
-            if (x.type === "password" || y.type === "repassword"){
-                x.type = "text";
-                y.type = "text";
+        document. getElementById('showPassword'). onclick = function() {
+            if ( this. checked ) {
+                document. getElementById('password'). type = "text";
+                document. getElementById('repassword'). type = "text";
             } else {
-                x.type = "password";
-                y.type = "password";
+                document. getElementById('password'). type = "password";
+                document. getElementById('repassword'). type = "password";
             }
-        }
-        let password = document.getElementById('password');
-        let repassword = document.getElementById('repassword');
-        repassword.addEventListener('onkeyup', (event) => {
-            if(password != repassword){
-                event.target.style.background = 'red';
-            }
-        });
-        //document.getElementById('repassword').addEventListener('blur', () => {
-        //    if(password == repassword){
-        //        document.getElementById('error_msg').style.display = 'none';
-        //    }else{
-        //        document.getElementById('error_msg').style.display = 'block';
-        //        document.getElementById('error_msg').style.color = 'red';
-        //    }
-        //});
+        };
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

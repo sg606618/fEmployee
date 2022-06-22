@@ -149,3 +149,29 @@ textarea{
         display: flex;
     }
 }
+
+#button{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 2px 2px 2px rgb(79, 176, 214);
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+#button:hover{
+    box-shadow: 4px 3px 3px rgb(79, 176, 214);
+    opacity: .8;
+}
+
+#back_sign{
+    position: absolute;
+    left: 9%;
+    width: clamp(20px, 4vw, 30px);
+    cursor: pointer;
+    transition-duration: 1s;
+}
+#back_sign:hover{
+    left: 8%;
+}

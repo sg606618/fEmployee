@@ -27,35 +27,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-
+    <script>
+        function search(){
+            <?php
+                $search = $_POST['search'];
+                if(!$search == ''){
+                    $sql = "SELECT * FROM registration WHERE `Address` LIKE '%$search%' ORDER BY `S.N.` DESC";
+                    $result = mysqli_query($conn, $sql);
+                    if(!$result){
+                        die ("Error in Selecting Database , <br> Please check!!!");
+                    }
+                }
+            ?>
+        }
+    </script>
 <body>
     <div class="container">
         <h2 id="logo">fEmployee</h2>
         <hr>
+        <h2 class="find">Find Workers Here !</h2>
         <div class="search-bar">
-            <a href="index.php">
-                <img src="images/back_button.png" alt="" id="back_sign">
-            </a>
-            <!-- <i class="fa fa-search fa-2x" id="search-icon" onclick="clickSearch()"></i>
-            <input type="search" name="search" placeholder="Search your nearest location ..." id="search"> -->
-            <h2 class="find">Find Workers Here !</h2>
-
+            <form onsubmit="search()" method="post">
+                <a href="index.php">
+                    <img src="images/back_button.png" alt="" id="back_sign">
+                </a>
+                <input type="search" name="search" placeholder="Search your nearest location ..." id="search">
+                <input type="submit" value="" name="submit" style="dipaly: none;">
+                <i class="fa fa-search fa-2x" id="search-icon"></i>
+            </form>
         </div>
         <hr>
     </div>
     <div class="information">
-        <?php 
+        <?php
             $num = mysqli_num_rows($result);
             // echo $num;
             if($num > 0){
                 while($row = mysqli_fetch_assoc($result)){
-                    if(!($row['Name'] == '' || $row['Address'] == '')){
         ?>
         <div class="contentinfo">
             <div class="info">
                 <div class="top_section">
                     <div class="image-icons">
-                        <a href="individual.php"><img src="<?php echo $row['Photo'] ?>" alt="images" onerror="this.src='images/profile.png';" class="profile" /></a>
+                        <a href="individual.php?var=<?php echo $row['Email'] ?>">
+                            <img src="<?php echo $row['Photo'] ?>" alt="images" onerror="this.src='images/profile.png';" class="profile" />
+                        </a>
                         <section class="img-icon">
                             <i class="fa fa-2x fa-github"></i>
                             <i class="fa fa-2x fa-facebook-square"></i>
@@ -78,9 +94,8 @@
         </div>
         <?php
                 }
-            }
             }else{
-                echo "no data found";
+                echo "<p style='font-size: 20px; color: red;'>This location isn't available here!!!<br> Try another nearby location...</p>";
             }
             mysqli_close($conn);
         ?>
@@ -104,20 +119,4 @@
             </p>
         </div>
 </body>
-
-<script>
-
-    let searchBar = document.getElementById('search')
-
-    function clickSearch() {
-
-        if (searchBar.style.display == 'none') {
-            searchBar.style.display = 'block'
-        } else {
-            searchBar.style.display = 'none'
-        }
-    }
-
-</script>
-
 </html>

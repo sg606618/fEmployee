@@ -158,15 +158,15 @@
             </div>
             <div class="last2">
                 <h2 style="text-decoration: underline;">Meet US</h2>
-                <div class="one">
+                <div class="o one">
                     <i class="fa fa-phone"></i>
                     <a class="lastSecond" href="tel: 9860194329">9860194329</a>
                 </div>
-                <div class="two">
+                <div class="o two">
                     <i class="fa fa-envelope"></i>
                     <a class="lastSecond" href="mailto: femployee@gmail.com">femployee@gmail.com</a>
                 </div>
-                <div class="three">
+                <div class="o three">
                     <i class="fa fa-location-arrow"></i>
                     <a class="lastSecond" target="_blank" href="https://www.google.com/maps/place/Xavier+International+College/@27.7207524,85.3582103,18.8z/data=!4m12!1m6!3m5!1s0x39eb1bd9a2fc450b:0xc4897771cd30db17!2sXavier+International+College!8m2!3d27.7208437!4d85.3588288!3m4!1s0x39eb1bd9a2fc450b:0xc4897771cd30db17!8m2!3d27.7208437!4d85.3588288">Boudha, Kathmandu</a>
                 </div>
@@ -196,6 +196,7 @@
             </p>
         </div>
 </body>
+<script src="script.js"></script>
 <script>
     document.getElementById('contact_info').addEventListener('click', () =>{
         if(document.getElementById('form').style.display == 'flex'){
