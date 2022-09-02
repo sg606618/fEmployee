@@ -19,6 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms And Condition</title>
+    <?php include "favicon.html" ?>
     <style><?php include "termsCondition.css" ?></style>
     <style><?php include "style.css" ?></style>
     <link rel="stylesheet" href="form.css">
@@ -57,11 +58,7 @@
                 <img src="images/profile.png" id="profile2" alt="">
             </a> -->
             <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
+            <li><a href="vacancy.php">Find Vacancies</a></li>
             <li><a href="about.php">About</a></li>
         </ul>
         <a href="contact.php"><button id="contact_btn">Contact</button></a>
@@ -72,11 +69,7 @@
                 <img src="images/profile.png" id="profile1" alt="">
             </a> -->
             <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
+            <li><a href="vacancy.php">Find Vacancies</a></li>
             <li><a href="about.php">About</a></li>
             <li onclick="hideThreeLine()"><a>Exit</a></li>
         </ul>

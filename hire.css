@@ -67,6 +67,11 @@
     justify-content: flex-end;
     padding: 20px;
 }
+.search-bar form button{
+    width: none;
+    background: transparent;
+    border: none;
+}
 .find{
     margin: auto;
     text-align: center;
@@ -78,7 +83,6 @@ h3{
     margin: 20px;
     font-size: clamp(20px, 4vw, 30px);
     text-align: center;
-    text-decoration: underline;
 }
 
 /* Main informations about the workers */

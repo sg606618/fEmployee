@@ -1,15 +1,8 @@
 <?php
-    session_start();
-
-    if(isset($_SESSION['email']) && $_SESSION['email'] == true){
-        $loggedin = true;
-    }else{
-        $loggedin = false;
-    }
-    
+    include "loginOrNot.php";
 ?>
 
-<?php include_once "connectDatabase.php" ?>
+<?php require_once("connectDatabase.php"); ?>
 
 
 <!DOCTYPE html>
@@ -20,71 +13,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
-    <link rel="stylesheet" href="terms.css" />
-    <!-- <link rel="stylesheet" href="about.css"> -->
+    <?php include "favicon.html" ?>
     <style><?php include "style.css" ?></style>
+    <style><?php include "terms.css" ?></style>
     <style><?php include "about.css" ?></style>
 </head>
 
 <body>
-<header>
-        <h2 id="logo">fEmployee</h2>
-        <ul>
-            <?php
-            if($loggedin){
-                echo '<a href="logout.php">
-                <li id="startLogin" style="margin-left: -50%;">Logout</li>
-                </a>
-                <a href="userProfile.php">
-                <img src="' . $_SESSION["photo"] . '" style="border-radius: 50%;" id="profile2" alt="">
-                </a>';
-            }
-            if(!$loggedin){
-                echo '<a href="registration.html">
-                    <li  id="startSignup">Registration</li>
-                </a>
-                <a href="login.php">
-                    <li id="startLogin">Login</li>
-                </a>';
-            }
-            ?>
-        </ul>
-    </header>
-    
-    <nav id="nav">
-        <ul>
-            <img src="images/ThreeLineDot.png" alt="" id="threeLine" onclick="displayThreeLine()" />
-            <!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile2" alt="">
-            </a> -->
-            <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
-            <li><a href="about.php">About</a></li>
-        </ul>
-        <a href="contact.php"><button id="contact_btn">Contact</button></a>
-    </nav>
-    <section id="menus">
-        <ul>
-            <!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile1" alt="">
-            </a> -->
-            <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
-            <li><a href="about.php">About</a></li>
-            <li onclick="hideThreeLine()"><a>Exit</a></li>
-        </ul>
-        <img class="section-images" src="images/facebook-icon.png" alt="">
-        <img class="section-images" src="images/instagram-icon.png" alt="">
-        <img class="section-images" src="images/twitter-icon.png" alt="">
-    </section>
+
+    <?php include "navigation.php"; ?>
+
     <div class="container">
         <h1 class="about-us">About Us</h1>
         <div class="social-media">
@@ -119,24 +57,9 @@
             </div>
         </div>
     </div>
-    <div class="terms-conditions">
-        <div class="terms">
-            <h1 id="terms">Terms</h1>
-            <a href="privacyPolicy.php" class="privacyPolicy">Privacy Policy</a>
-            <a href="termsCondition.php" class="privacyPolicy">Terms and Conditions</a>
-        </div>
-        <h2 id="logo" class="logoE">fEmployee</h2>
-
-        <div>
-            <p class="copyright">
-                fEmployee is a registered trademark of Freelancer Technology Pty Limited
-            </p>
-        </div>
-        <div>
-            <p class="copyright">
-                Copyright &copy; 2022 Freelancer Technology Pty Limited
-            </p>
-        </div>
+    <?php include "footer.html" ?>
 </body>
+
+    <script src="script.js"></script>
 
 </html>

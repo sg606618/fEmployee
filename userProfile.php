@@ -1,6 +1,5 @@
 <?php
     session_start();
-    
     require_once("connectDatabase.php");
 
     $mail = $_SESSION['email'];
@@ -22,26 +21,17 @@
         if($nam == '' || $add == '' || $sk == '' || $ph == '' || $wh == '' || $des == ''){
             echo "<script>alert('You have to fill the blank areas to submit ...')</script>";
         }else{
-            // $pass = $_POST['pass'];
-            // $db_pass = $_SESSION['password'];
-            // $pass_decode = password_verify($pass, $db_pass);
             if($fileerror == 0){
                 $destfile = 'imagefolder/'. $filename;
-                // echo $destfile;
                 move_uploaded_file($filepath, $destfile);
-                // if($pass_decode){
-                    $sql = "UPDATE `registration` SET `Name`='$nam',`Address`='$add', `Skill`='$sk',`Phone`='$ph',`Description`='$des', `Working Hours`='$wh', `Photo`='$destfile' WHERE `Email` = '$mail'";
-                    $result = mysqli_query($conn, $sql);
-                    if(!$result){
-                        echo "error in updating ...";
-                    }
-                // }else{
-                //     echo "<script>alert('Password Incorrect...');</script>";
-                // }
+                $sql = "UPDATE `registration` SET `Name`='$nam',`Address`='$add', `Skill`='$sk',`Phone`='$ph',`Description`='$des', `Working Hours`='$wh', `Photo`='$destfile' WHERE `Email` = '$mail'";
+                $result = mysqli_query($conn, $sql);
+                if(!$result){
+                    echo "error in updating ...";
+                }
                 $select = "SELECT * FROM registration WHERE `Email` = '$mail'";
                 $check = mysqli_query($conn, $select);
                 $num = mysqli_num_rows($check);
-                // echo $num;
                 if($num){
                     while($rows = mysqli_fetch_assoc($check)){
                         $_SESSION['name'] = $rows['Name'];
@@ -54,6 +44,18 @@
                     }
                 }
             }
+        }
+    }
+
+    $query = "SELECT * FROM registration WHERE `Email` = '$mail'";
+    $checks = mysqli_query($conn, $query);
+    if(!$checks){
+        echo "error occur";
+    }
+    $nums = mysqli_num_rows($checks);
+    if($nums){
+        while ($row = mysqli_fetch_assoc($checks)) {
+            
         }
     }
 
@@ -70,6 +72,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $_SESSION['name'] ?></title>
+    <?php include "favicon.html" ?>
     <style><?php include "userProfile.css" ?></style>
     <style><?php include "style.css" ?></style>
     <style><?php include "terms.css" ?></style>
@@ -79,13 +82,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-
-
-
 </head>
 
 <body>
     <div class="formWrapper" id="formWrapper">
+        <div id="line"></div>
         <h2>Edit Profile</h2>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="check()" method="post" enctype="multipart/form-data">
             <label for="">Full Name :</label> <br>
@@ -113,9 +114,9 @@
             <li><a href="vacancy.php">Find Job</a></li>
         </ul>
         <h2 id="logo">fEmployee</h2>
-        <div class="photoProfile" style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+        <div class="photoProfile" style="display: flex; flex-direction: row; align-items: center; color: blue; margin-right: 10px; gap: 0px;">
             <a id="options" href="">
-                <abbr title="<?php echo $_SESSION["name"]; ?>">
+                <abbr style="margin: 0;" title="<?php echo $_SESSION["name"]; ?>">
                     <img src="<?php echo $_SESSION['photo']; ?>" onerror='this.src="images/profile.png";' id="profile1" alt="" style="position: relative;">
                 </abbr>
             </a>
@@ -123,6 +124,7 @@
                 <ol>
                     <li id="clickLog"><a href="logout.php">Logout</a></li><hr>
                     <li id="edit">Edit</li><hr>
+                    <a href="messages.php?mail=<?= $_SESSION['email'] ?>"><li id="edit">Messages</li></a><hr>
                     <li id="exit">Exit</li>
                 </ol>
             </div>
@@ -169,7 +171,7 @@
         </fieldset>
         <hr>
         <fieldset class="workingHistory">
-            <h2 style="text-decoration: underline;" class="working-history">Working History</h2><br>
+            <h2 style="text-decoration: underline;" class="working-history">Applied History</h2><br>
             <div class="company">
                 <strong for="">AAA Company Ltd.</strong>
                 <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
@@ -187,55 +189,9 @@
             </div>
         </fieldset>
         <hr>
-        <fieldset class="portfolio">
-            <h1>Portfolio</h1>
-            <div class="add-port">
-
-                <div class="image-upload">
-                    <label for="file-input" id="inputFile">
-                        <img src="images/plus-icon.png" class="plus-icon" height=' 100vw' width='100vw' />
-                    </label><br>
-                    <input id="file-input" type="file" name="image" onchange="loadFile(event)" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.html, .jpg, .jpeg, .png, .svg" />
-                </div>
-                <div id="output" class="output">
-                    <img src="images/employee.png" alt="">
-                    This is an apple
-                </div>
-
-                <label for="" style="color: orange; font-size: clamp(10px, 3vw, 15px);">ShowCase your work to win more projects. Add items to impress clients.</label>
-            </div>
-        </fieldset>
-        <hr>
-        <fieldset class="hrs">
-            <h2>Working Hours</h2>
-            <p>More than <?php echo $_SESSION['work']; ?> hrs a day</p>
-        </fieldset>
-        <hr>
-        <fieldset class="languages">
-            <h2>Language Skills</h2>
-            <p class="langu"><?php echo $_SESSION['lang']; ?></p>
-        </fieldset>
     </div>
 
-    <div class="terms-conditions">
-        <div class="terms">
-            <h1 id="terms">Terms</h1>
-            <a href="privacyPolicy.php" class="privacyPolicy">Privacy Policy</a>
-            <a href="termsCondition.php" class="privacyPolicy">Terms and Conditions</a>
-        </div>
-        <h2 id="logo" class="logoE">fEmployee</h2>
-
-        <div>
-            <p class="copyright">
-                fEmployee is a registered trademark of Freelancer Technology Pty Limited
-            </p>
-        </div>
-        <div>
-            <p class="copyright">
-                Copyright &copy; 2022 Freelancer Technology Pty Limited
-            </p>
-        </div>
-    </div>
+    <?php include "footer.html" ?>
     
 </body>
 
@@ -250,29 +206,22 @@
             document.getElementById('option').style.visibility = "hidden";
         }
     });
-    document.getElementById('edit').addEventListener('click', ()=> {
-        if(document.getElementById('formWrapper').style.top == "-100%"){
+    document.getElementById('exit').addEventListener('click', ()=> {
+        document.getElementById('option').style.visibility = "hidden";
+        document.getElementById('formWrapper').style.top = "-150%";
+        document.getElementById('container').style.opacity = "1";
+    })
+    document.getElementById('edit').addEventListener('click', hideEditProfile);
+    document.getElementById('line').addEventListener('click', hideEditProfile);
+    function hideEditProfile(){
+        if(document.getElementById('formWrapper').style.top == "-150%"){
             document.getElementById('formWrapper').style.top = "2%";
             document.getElementById('container').style.opacity = ".2";
         }else{
-            document.getElementById('formWrapper').style.top = "-100%";
+            document.getElementById('formWrapper').style.top = "-150%";
             document.getElementById('container').style.opacity = "1";
         }
-    });
-    document.getElementById('exit').addEventListener('click', ()=> {
-        document.getElementById('option').style.visibility = "hidden";
-        document.getElementById('formWrapper').style.top = "-100%";
-        document.getElementById('container').style.opacity = "1";
-    })
-</script>
-
-<script>
-    // var loadFile = function (event) {
-    //     document.getElementById('output').style.display = 'block';
-    //     var image = document.getElementById('output');
-    //     image.src = URL.createObjectURL(event.target.files[0]);
-    //     document.getElementById('output').style.outline = '4px solid black';
-    // };
+    };
 </script>
     <?php   
         }else{

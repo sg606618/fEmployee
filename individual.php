@@ -1,7 +1,8 @@
 <?php include 'connectDatabase.php' ?>
 <?php
+    // include "loginOrNot.php";
+
 	$mail = $_GET['var'];
-	// echo $mail;
 	$sql = "select * from registration where `Email` = '$mail'";
 	$result = mysqli_query($conn, $sql);
 	if(!$result){
@@ -20,6 +21,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php include "favicon.html" ?>
 	<title><?php echo $row['Name']; ?> || fEmployee</title>
 	<style><?php include "style.css" ?></style>
 	<style><?php include "terms.css" ?></style>
@@ -28,13 +30,9 @@
 
 <body>
 	<header>
-		<h2 id="logo">fEmployee</h2>
+		<h2 id="logo" onclick="window.location = 'index.php'">fEmployee</h2>
 		<ul>
-			<?php
-                echo '<a href="logout.php">
-                <li id="startLogin" style="margin-left: -50%;">Logout</li>
-                </a>';
-            ?>
+			
 		</ul>
 	</header>
 
@@ -42,8 +40,8 @@
 		<ul>
 			<img src="images/ThreeLineDot.png" alt="" id="threeLine" onclick="displayThreeLine()" />
 			<!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile2" alt="">
-            </a> -->
+					<img src="images/profile.png" id="profile2" alt="">
+				</a> -->
 			<li><a href="index.php">Home</a></li>
 			<li><a href="vacancy.php">Find Vacancies</a></li>
 			<li><a href="about.php">About</a></li>
@@ -53,8 +51,8 @@
 	<section id="menus">
 		<ul>
 			<!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile1" alt="">
-            </a> -->
+					<img src="images/profile.png" id="profile1" alt="">
+				</a> -->
 			<li><a href="index.php">Home</a></li>
 			<li><a href="vacancy.php">Find Vacancies</a></li>
 			<li><a href="about.php">About</a></li>
@@ -112,35 +110,15 @@
 			<p class="wh">This is the project to make a logo for our company. We use the previous logo for a years and
 				we want to change the logo in a new design.</p>
 		</div>
-		<h3 class="expe">Experiences</h3>
-		<p class="exp">3 years as a intern in <b>Bajra Int'l</b></p>
-		<!-- <input type="submit" value="Hire" name="hire">   -->
 	</div>
 
-	<div class="terms-conditions">
-		<div class="terms">
-			<h1 id="terms">Terms</h1>
-			<a href="privacyPolicy.php" class="privacyPolicy">Privacy Policy</a>
-			<a href="termsCondition.php" class="privacyPolicy">Terms and Conditions</a>
-		</div>
-		<h2 id="logo" class="logoE">fEmployee</h2>
-		<div>
-			<p class="copyright">
-				fEmployee is a registered trademark of Freelancer Technology Pty Limited
-			</p>
-		</div>
-		<div>
-			<p class="copyright">
-				Copyright &copy; 2022 Freelancer Technology Pty Limited
-			</p>
-		</div>
-	</div>
+	<?php include "footer.html" ?> 
 	<?php 
+	$val = $row['Email'];
 			}
 		}
 		mysqli_close($conn);
 	?>
-	
 </body>
-
+<script><?php include "script.js"; ?></script>
 </html>

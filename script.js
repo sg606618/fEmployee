@@ -1,26 +1,26 @@
 let menu = document.getElementById('threeLine');
-
+let nav = document.getElementById('nav');
 let menuShow = document.getElementById('menus');
 
+window.onload = function() {
+    document.onclick = function (div) {
+        if(div.target.id !== 'menus' && div.target.id !== 'threeLine'){
+            menuShow.style.left = '-100%';
+        }
+    }
+}
 function displayThreeLine(){
-    menuShow.style.display = "block";
+    menuShow.style.left = "0%";
 }
 function hideThreeLine(){
-    menuShow.style.display = "none";
+    menuShow.style.left = "-100%";
 }
-
-
-// // Hide unhide the login form
-// function login() {
-//     if(document.getElementById('containerForm').style.display == "none"){
-//         document.getElementById('containerForm').style.display = 'flex';
-//     }else{
-//         document.getElementById('containerForm').style.display = 'none';
-//     }
+// if(nav.style.display === "flex"){
+//     menuShow.style.display = "none";
+// }else{
+//     menuShow.style.display = "block";
 // }
-// function hideLogin() {
-//     document.getElementById('containerForm').style.display = "none";
-// }
+
 
 // Password show or hide 
 function showpass() {
@@ -56,3 +56,19 @@ function checked() {
         document.getElementById("checkbox").checked = false;
     }
 }
+
+
+
+// Individual 
+document.getElementById('pay').addEventListener('click', hidePaymentContent);
+document.getElementById('line').addEventListener('click', hidePaymentContent);
+function hidePaymentContent(){
+    if(document.getElementById('payForm').style.top == "-150%"){
+        document.getElementById('payForm').style.top = "2%";
+        if(document.id !== 'payForm'){
+            document.style.opacity = '.3';
+        }
+    }else{
+        document.getElementById('payForm').style.top = "-150%";
+    }
+};

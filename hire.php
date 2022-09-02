@@ -1,5 +1,7 @@
 <?php include_once "connectDatabase.php" ?>
 <?php 
+    include "loginOrNot.php";
+
     $sql = "SELECT * FROM registration ORDER BY `S.N.` DESC";
     $result = mysqli_query($conn, $sql);
     if(!$result){
@@ -15,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hire Workers</title>
+    <?php include "favicon.html" ?>
     <!-- <link rel="stylesheet" href="hire.css"> -->
     <style>
         <?php include "hire.css" ?>
@@ -52,8 +55,8 @@
                     <img src="images/back_button.png" alt="" id="back_sign">
                 </a>
                 <input type="search" name="search" placeholder="Search your nearest location ..." id="search">
-                <input type="submit" value="" name="submit" style="dipaly: none;">
-                <i class="fa fa-search fa-2x" id="search-icon"></i>
+                <input type="hidden" value="" name="submit" style="display: none;">
+                <button type="submit"><i class="fa fa-search fa-2x" id="search-icon"></i></button>
             </form>
         </div>
         <hr>
@@ -100,23 +103,6 @@
             mysqli_close($conn);
         ?>
     </div>
-    <div class="terms-conditions">
-        <div class="terms">
-            <h1 id="terms">Terms</h1>
-            <a href="privacyPolicy.php" target="_blank" class="privacyPolicy">Privacy Policy</a>
-            <a href="termsCondition.php" target="_blank" class="privacyPolicy">Terms and Conditions</a>
-        </div>
-        <h2 id="logo" class="logoE">fEmployee</h2>
-
-        <div>
-            <p class="copyright">
-                fEmployee is a registered trademark of Freelancer Technology Pty Limited
-            </p>
-        </div>
-        <div>
-            <p class="copyright">
-                Copyright &copy; 2022 Freelancer Technology Pty Limited
-            </p>
-        </div>
+    <?php include "footer.html" ?>
 </body>
 </html>

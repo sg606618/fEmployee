@@ -1,0 +1,159 @@
+body{
+    background: white;
+}
+ul a li.reg{
+    position: relative;
+}
+.dropdown{
+    display: none;
+    position: absolute;
+    z-index: 100;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    padding: .2rem;
+    background: black;
+}
+.dropdown p{
+    margin: .5rem 0;
+    width: 100%;
+}
+.dropdown p a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+.dropdown p:hover{
+    outline: 5px solid white;
+    background: white;
+    color: black;
+}
+.dropdown p a:hover{
+    color: black;
+}
+h1#vacancies{
+    text-align: center;
+    text-decoration: underline;
+    text-shadow: 2px 1px 2px black;
+    color: green;
+    font-size: 30px;
+}
+/* search button */
+#search{
+    width: 50%;
+    padding: .4rem 10px;
+    font-size: 20px;
+    border: none;
+    outline: 1px solid green;
+    border-radius: 10px;
+    animation: slide .3s ease forwards;
+}
+@keyframes slide{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+button b{
+    order: 2;
+    height: max-content;
+    cursor: pointer;
+    background: wheat;
+    padding: .5rem 10px;
+    margin-left: 15px;
+    border: none;
+    outline: 1px solid black;
+}
+button b:hover{
+    background: rgb(233, 192, 121);
+    font-style: normal;
+}
+.search-bar form{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.search-bar form button{
+    width: none;
+    background: transparent;
+    border: none;
+}
+.find{
+    margin: auto;
+    text-align: center;
+    font-size: clamp(14px, 4vw, 30px);
+    text-decoration: underline;
+}
+
+h3{
+    margin: 20px;
+    font-size: clamp(20px, 4vw, 30px);
+    text-align: center;
+    text-decoration: underline;
+}
+
+/* Main container */
+.informations{
+    margin: 2rem 0;
+    padding: 0 3rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+.vacancy_wrapper{
+    height: 88px;
+    background: rgb(255, 255, 255);
+    display: flex;
+    border: 1px solid black;
+    box-shadow: 2px 2px 1px 1px rgb(0, 0, 0);
+    padding: .5rem;
+    overflow: hidden;
+}
+.info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.vacancy_wrapper a #thumbnail{
+    cursor: pointer;
+    font-size: 15px;
+    width: 80px;
+    height: 80px;
+    margin-right: 1rem;
+    padding: .5rem;
+    background-color: rgba(20, 50, 20, .5);
+}
+.info h2 a{
+    cursor: pointer;
+    color: red;
+    text-shadow: 1px 1px 1px black;
+    font-size: 18px;
+    font-weight: 600;
+    width: fit-content;
+}
+.info h2 a:hover{
+    text-decoration: underline;
+}
+.info small{
+    color: grey;
+    font-size: 10px;
+}
+.info small:last-child{
+    align-self: end;
+}
+.info p{
+    color: black;
+    overflow: hidden;
+}
+
+@media (max-width: 400px){
+    .informations{
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .vacancy_wrapper a #thumbnail{
+        font-size: 12px;
+    }
+}

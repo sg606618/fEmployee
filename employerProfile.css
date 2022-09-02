@@ -1,0 +1,297 @@
+body{
+    background: rgba(20, 20, 20, .5);
+}
+
+/* The Navigation Bar */
+nav{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    align-items: center;
+    height: min-content;
+}
+#profile1{
+    width: clamp(30px, 2vw, 80px);
+    height: clamp(30px, 2vw, 80px);
+}
+#profile{
+    width: clamp(50px, 4vw, 100px);
+    height: clamp(50px, 4vw, 100px);
+    cursor: pointer;
+}
+#profile:hover{
+    transform: scale(1.1);
+}
+#threeLine{
+    display: block;
+}
+
+
+/* Content Field */
+.container{
+    width: 100%;
+    height: 100%;
+    padding: 2% 5%;
+    background: whitesmoke;
+    transition: 1s opacity;
+}
+fieldset{
+    padding: 2% 5%;
+    border: none;
+    width: 100%;
+}
+
+.user{
+    display: flex;
+}
+.data{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.data a{
+    color: green;
+    text-decoration: underline;
+}
+
+
+.skill{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+}
+
+.skillName{
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+}
+.skillDesc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+}
+label{
+    font-size: clamp(14px, 4vw, 18px);
+}
+textarea{
+    padding: 2%;
+    font-size: clamp(12px, 3vw, 16px);
+    resize: none;
+    width: 100%;
+    height: 200px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+.workingHistory{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.working-history{
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+}
+.company{
+    margin: 20px 0;
+    border: 1px solid wheat;
+    width: 70%;
+    padding: 20px 10px;
+}
+
+
+.portfolio{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto;
+}
+.add-port{
+    margin-left: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.plus-icon{
+    width: clamp(100px, 15vw, 200px);
+    height: clamp(100px, 15vw, 200px);
+}
+#inputFile[type="file"]{
+    color: transparent;
+}
+.image-upload label img{
+    cursor: pointer;
+}
+.image-upload>input {
+    display: none;
+}
+#output{
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+    display: none;
+}
+#portImage{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 10px;
+    width: 100%;
+    height: fit-content;
+    place-items: center;
+}
+#portImage a > img{
+    height: 200px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+}
+strong{
+    font-size: clamp(14px ,3vw, 18px);
+}
+p{
+    font-size: clamp(10px ,3vw, 15px);
+}
+h2{
+    font-size:clamp(16px, 4vw, 20px)
+}
+h1{
+    font-size: clamp(18px, 6vw, 25px);
+}
+.langu{
+    word-break: break-word;
+}
+@media (max-width:500px){
+    .skill, .portfolio{
+        grid-template-columns: auto;
+    }
+}
+@media (min-width:400px){
+    #profile1{
+        width: 30px;
+        height: 30px;
+        margin-right: 0;
+    }
+}
+img{
+    border-radius: 50%;
+}
+
+#option ol li{
+    list-style: none;
+    font-weight: 200;
+    margin: 10px 30px;
+    box-shadow: 1px 1px 1px 1px whitesmoke;
+    padding: 5px;
+}
+#option ol li:hover{
+    cursor: pointer;
+    font-weight: 300;
+    transform: scale(1.02);
+    box-shadow: 2px 2px 2px 2px whitesmoke;
+}
+#option {
+    display: flex;
+    flex-direction: column;
+    background: rgba(20, 20, 20, .9);
+    color: white;
+    justify-content: space-between;
+    height: fit-content;
+    visibility: hidden;
+    position: absolute;
+    right: 0%;
+    top: 1%;
+    z-index:20;
+}
+
+/* Content/Profile Editing of the User */
+#line{
+    width: 1em;
+    margin-left: auto;
+    height: 1px;
+    background-color: darkblue;
+    transform: rotate(45deg);
+    float: right;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  #line::after{
+    content: '';
+    position: absolute;
+    width: 1em;
+    height: 1px;
+    background-color: darkblue;
+    transform: rotate(-90deg);
+  }
+.formWrapper{
+    background: url("images/employee.jfif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+    width: fit-content;
+    height: max-content;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0%;
+    right: 0%;
+    top: -150%;
+    z-index: 20;
+    transition: 1s top;
+    filter: drop-shadow(10px 10px 40px black);
+    border-radius: 1rem;
+}
+.formWrapper h2{
+    text-decoration: underline;
+    margin-bottom: 10px;
+    color: green;
+}
+.formWrapper form label{
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], input[type="file"], input[type="password"], textarea{
+    outline: none;
+    padding: 12px 5px;
+    font-weight: bold;
+    font-size: clamp(13px, 4vw, 15px);
+    width: clamp(100px, 50vw, 300px);
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="number"], input[type="file"], input[type="password"]{
+    height: 10px;
+}
+input[type="file"]{
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+}
+input:focus, textarea:focus{
+    outline: 1px solid green;
+}
+textarea{
+    resize: none;
+    height: 100px;
+}
+
+input[type="submit"]{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 5px 10px;
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 600;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: lightblue;
+}
+input[type="submit"]:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    background: rgb(109, 193, 221);
+}

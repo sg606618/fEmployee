@@ -71,6 +71,11 @@
     justify-content: flex-end;
     padding: 20px;
 }
+.search-bar form button{
+    width: none;
+    background: transparent;
+    border: none;
+}
 
 /* Container field */
 .container1{

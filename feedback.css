@@ -14,14 +14,18 @@
     padding: 10px 20px;
     border: 2px solid black;
 }
-h2{
-    font-size: clamp(16px, 4vw, 25px);
-    text-decoration: underline;
+span b{
+    font-size: clamp(14px, 4vw, 18px);
     color: green;
-    margin-bottom: 10px;
+}
+h2{
+    margin-top: 20px;
+    font-size: clamp(12px, 3vw, 16px);
+    color: black;
 }
 h4{
     font-size: clamp(12px, 3vw, 16px);
+    color: grey;
 }
 p{
     font-size: clamp(11px, 3vw, 15px);

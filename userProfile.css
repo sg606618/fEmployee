@@ -33,6 +33,7 @@ nav{
     height: 100%;
     padding: 2% 5%;
     background: whitesmoke;
+    transition: 1s opacity;
 }
 fieldset{
     padding: 2% 5%;
@@ -166,6 +167,13 @@ h1{
         grid-template-columns: auto;
     }
 }
+@media (min-width:400px){
+    #profile1{
+        width: 30px;
+        height: 30px;
+        margin-right: 0;
+    }
+}
 img{
     border-radius: 50%;
 }
@@ -198,6 +206,24 @@ img{
 }
 
 /* Content/Profile Editing of the User */
+#line{
+    width: 1em;
+    margin-left: auto;
+    height: 1px;
+    background-color: darkblue;
+    transform: rotate(45deg);
+    float: right;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#line::after{
+    content: '';
+    position: absolute;
+    width: 1em;
+    height: 1px;
+    background-color: darkblue;
+    transform: rotate(-90deg);
+}
 .formWrapper{
     background: url("images/employee.jfif");
     background-size: cover;
@@ -213,8 +239,11 @@ img{
     position: fixed;
     left: 0%;
     right: 0%;
-    top: -100%;
+    top: -150%;
     z-index: 20;
+    transition: 1s top;
+    filter: drop-shadow(10px 10px 40px black);
+    border-radius: 1rem;
 }
 .formWrapper h2{
     text-decoration: underline;

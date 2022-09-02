@@ -1,0 +1,38 @@
+/* Footer */
+footer{
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    background-color: #060C0F;
+    padding: 2rem;
+    color: white;
+}
+.footerContent h4{
+    margin: .5rem 0;
+    font-weight: bolder;
+    font-size: 18px;
+}
+.footerContent p a{
+    text-decoration: none;
+    color: #bcbeb9;
+    font-size: 12px;
+    font-weight: bold;
+}
+.footerContent p a:hover{
+    text-decoration: underline;
+    color: #ffffff;
+}
+.copyright{
+    padding: .5rem 0;
+    width: 100%;
+    background: black;
+    color: white;
+}
+.copyright p{
+    text-align: center;
+}
+.copyright p a{
+    color: green;
+    text-decoration: underline;
+}

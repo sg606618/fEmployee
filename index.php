@@ -1,15 +1,7 @@
 <?php
-    session_start();
-
-    if(isset($_SESSION['email']) && $_SESSION['email'] == true){
-        $loggedin = true;
-    }else{
-        $loggedin = false;
-    }
-
+    include "loginOrNot.php";
+    require_once "connectDatabase.php";
 ?>
-
-<?php include_once "connectDatabase.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>fEmployee</title>
-
+    <?php include "favicon.html" ?>
     <style><?php include "style.css" ?></style>
     <style><?php include "content.css" ?></style>
     <style><?php include "background.css" ?></style>
@@ -28,65 +20,17 @@
     <style><?php include "skill-categories.css" ?></style>
     <style><?php include "belowContent.css" ?></style>
 
+
     <!-- Google font awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    
+
 </head>
 
 <body>
-    <header>
-        <h2 id="logo">fEmployee</h2>
-        <ul>
-            <?php
-                if($loggedin){
-                    echo '<a href="logout.php">
-                    <li id="startLogin" style="margin-left: -50%;">Logout</li>
-                    </a>
-                    <a href="userProfile.php">
-                    <img src="' . $_SESSION["photo"] . '" style="border-radius: 50%;" id="profile2" alt="">
-                    </a>';
-                }
-                if(!$loggedin){
-                    echo '<a href="registration.html">
-                        <li  id="startSignup">Registration</li>
-                    </a>
-                    <a href="login.php">
-                        <li id="startLogin">Login</li>
-                    </a>';
-                }
-            ?>
-        </ul>
-    </header>
     
-    <nav id="nav">
-        <ul>
-            <img src="images/ThreeLineDot.png" alt="" id="threeLine" onclick="displayThreeLine()" />
-            <!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile2" alt="">
-            </a> -->
-            <li><a href="index.php">Home</a></li>
-            <li><a href="vacancy.php">Find Vacancies</a></li>
-            <li><a href="about.php">About</a></li>
-        </ul>
-        <a href="contact.php"><button id="contact_btn">Contact</button></a>
-    </nav>
-    <section id="menus">
-        <ul>
-            <!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile1" alt="">
-            </a> -->
-            <li><a href="index.php">Home</a></li>
-            <li><a href="vacancy.php">Find Vacancies</a></li>
-            <li><a href="about.php">About</a></li>
-            <li onclick="hideThreeLine()"><a>Exit</a></li>
-        </ul>
-        <img class="section-images" src="images/facebook-icon.png" alt="">
-        <img class="section-images" src="images/instagram-icon.png" alt="">
-        <img class="section-images" src="images/twitter-icon.png" alt="">
-    </section>
+    <?php include "navigation.php"; ?>
     
     <!-- Images of the background -->
     <div class="transparent" id="transparent">
@@ -108,11 +52,12 @@
             <div class="space"></div>
             <div class="buttons">
                 <a href="hire.php"><button class="hire buttonhf">Hire Workers</button></a>
-                <a href="open.html"><button class="find buttonhf">Open Vacancy</button></a>
+                <a href="open.php"><button class="find buttonhf">Open Vacancy</button></a>
             </div>
         </div>
         
         <hr>
+        <!-- Main Informaion -->
         <!-- Main Informaion -->
         <?php 
             if(!$loggedin){
@@ -127,14 +72,14 @@
                     $sql = "SELECT * FROM registration ORDER BY `S.N.` DESC";
                     $result = mysqli_query($conn, $sql);
                     if(!$result){
-                        die ("Error in Selecting Database , <br> Please check!!!");
+                        echo ("<h1 style='color: red; font-weight: 500;'>There is not any user Registered yet.!!!</h1>");
                     }
 
                     $num = mysqli_num_rows($result);
                     // $row = mysqli_fetch_assoc($result);
                     if($num > 0){
                         while($row = mysqli_fetch_assoc($result)){
-                            if(!$loggedin){
+                            if($employer){
                                 echo '<div class="contentinfo">
                                     <div class="info">
                                     <div class="top_section">
@@ -162,11 +107,12 @@
                                         </a>
                                     </div>
                                 </div>';
-                            }else{
+                            }
+                            if($loggedin){
                                 $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC";
                                 $result = mysqli_query($conn, $sql);
                                 if(!$result){
-                                    die ("Error in Selecting Database , <br> Please check!!!");
+                                    echo ("<h1 style='color: red; font-weight: 500;'>Wait for Organizer Vacancies to be Opened...!!!</h1>");
                                 }
                                 $num = mysqli_num_rows($result);
                                 // echo $num;
@@ -319,44 +265,8 @@
             <span class="skills">JavaScript</span>
         </div>
     </div>
-    <div class="terms-conditions">
-        <div class="terms">
-            <h1 id="terms">Terms</h1>
-            <a href="privacyPolicy.php" target="_blank" class="privacyPolicy">Privacy Policy</a>
-            <a href="termsCondition.php" target="_blank" class="privacyPolicy">Terms and Conditions</a>
-        </div>
-        <h2 id="logo" class="logoE">fEmployee</h2>
-        <div>
-            <p class="copyright">
-                fEmployee is a registered trademark of Freelancer Technology Pty Limited
-            </p>
-        </div>
-        <div>
-            <p class="copyright">
-                Copyright &copy; 2022 Freelancer Technology Pty Limited
-            </p>
-        </div>
-    </div>
-
+    <?php include "footer.html"; ?>
 </body>
-
-
-<script src="script.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.js" integrity="sha512-AsoAG+OFcSvtqlspW166UTUYg7F4GEu0yNhzTIRfOGysIQA8Dqk1WZwyoN4eX6mX4DaSk703Q1iM0M47rw25Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-<!-- <script>
-    document.getElementById('message').addEventListener('click', () => {
-      Email.send({
-        Host: "smtp.gmail.com",
-        Username: "sender@email_address.com",
-        Password: "Enter your password",
-        To: 'receiver@email_address.com',
-        From: "sender@email_address.com",
-        Subject: "Sending Email using javascript",
-        Body: "Well that was easy!!",
-      })
-        .then(function (message) {
-          alert("Mail sent successfully !! TO the spefic user...")
-        });
-    })
-</script> -->
+<!-- <script src="script.js"></script> -->
+<script><?php include "script.js"; ?></script>
 </html>

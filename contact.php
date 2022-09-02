@@ -1,50 +1,8 @@
 <?php
-    session_start();
-
-    if(isset($_SESSION['email']) && $_SESSION['email'] == true){
-        $loggedin = true;
-    }else{
-        $loggedin = false;
-    }
-    
+    include "loginOrNot.php";
 ?>
 
 <?php include_once "connectDatabase.php" ?>
-
-<?php
-    if(!isset($_POST['submit'])){
-        echo "";
-    }else{
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $desc = $_POST['desc'];
-        if(!$name == '' || !$phone == '' || !$email == '' || !$desc == ''){
-            $sql = "INSERT INTO contact(`Name`, `Mobile`, `Email`, `Description`) VALUES ('$name', '$phone', '$email', '$desc')";
-            $res = mysqli_query($conn, $sql);
-            if(!$res){
-                echo "Error occur!!!";
-            }
-        }
-    }
-    // mysqli-close($conn);
-
-
-    if(!isset($_POST['go'])){
-        echo "";
-    }else{
-        $name = $_POST['username'];
-        $pass = $_POST['password'];
-        $sql = "select * from admin where `username` = '$name' and `password` = '$pass'";
-        $result = mysqli_query($conn, $sql);
-        $num = mysqli_num_rows($result);
-        if($num){
-            header("location: feedback.php");
-        }else{
-            echo "";
-        }
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
+    <?php include "favicon.html" ?>
     <style><?php include "contact.css" ?></style>
     <style><?php include "terms.css" ?></style>
     <style><?php include "style.css" ?></style>
@@ -61,86 +20,22 @@
 </head>
 
 <body>
-    <abbr title="Admin Login Only !!!"><img src="images/message.png" id="contact_info" alt=""></abbr>
-    <div class="form" id="form">
-        <h2>Admin Login</h2>
-        <form method="post" class="contactForm">
-            <p>Admin only</p>
-            <input type="text" name="username" id="username" placeholder="Username / Email">
-            <input type="password" name="password" id="password" placeholder="Password">
-            <input type="submit" value="Go" name="go">
-        </form>
-    </div>
-    <header>
-        <h2 id="logo">fEmployee</h2>
-        <ul>
-            <?php
-            if($loggedin){
-                echo '<a href="logout.php">
-                <li id="startLogin" style="margin-left: -50%;">Logout</li>
-                </a>
-                <a href="userProfile.php">
-                <img src="' . $_SESSION["photo"] . '" style="border-radius: 50%;" id="profile2" alt="">
-                </a>';
-            }
-            if(!$loggedin){
-                echo '<a href="registration.html">
-                    <li  id="startSignup">Registration</li>
-                </a>
-                <a href="login.php">
-                    <li id="startLogin">Login</li>
-                </a>';
-            }
-            ?>
-        </ul>
-    </header>
-    
-    <nav id="nav">
-        <ul>
-            <img src="images/ThreeLineDot.png" alt="" id="threeLine" onclick="displayThreeLine()" />
-            <!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile2" alt="">
-            </a> -->
-            <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
-            <li><a href="about.php">About</a></li>
-        </ul>
-        <a href="contact.php"><button id="contact_btn">Contact</button></a>
-    </nav>
-    <section id="menus">
-        <ul>
-            <!-- <a href="userProfile.php">
-                <img src="images/profile.png" id="profile1" alt="">
-            </a> -->
-            <li><a href="index.php">Home</a></li>
-            <li><a <?php 
-            if($loggedin){
-                echo 'href="vacancy.php"';
-            }
-            ?>>Find Vacancies</a></li>
-            <li><a href="about.php">About</a></li>
-            <li onclick="hideThreeLine()"><a>Exit</a></li>
-        </ul>
-        <img class="section-images" src="images/facebook-icon.png" alt="">
-        <img class="section-images" src="images/instagram-icon.png" alt="">
-        <img class="section-images" src="images/twitter-icon.png" alt="">
-    </section>
+        
+    <?php include "navigation.php"; ?>
 
     <div class="wrapper">
         <div class="firstContent">
             <h2 class="quote">Anything,  You wanna know about !</h2>
         </div>
         <div class="secondContent">
-            <form class="formContact" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form class="formContact" onSubmit="history.back()" action="https://formsubmit.co/sg606618@gmail.com" method="POST">
                 <h2 class="quote quote1">Your FeedBack !!!</h2>
-                <input type="text" name="name" id="name" placeholder="Your full name ...">
-                <input type="text" name="phone" id="phone" placeholder="Your mobile no. ...">
-                <input type="email" name="email" id="email" placeholder="Your email address...">
-                <textarea name="desc" id="desc" placeholder="Your feedback ...."></textarea>
+                <input type="hidden" name="_cc" value="raajshrestha1999@gmail.com">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="User Feedback !!!">
+                <input type="email" name="email" id="email" placeholder="Your email address..." required>
+                <input type="hidden" name="_autoresponse" value="your custom message">
+                <textarea name="message" id="desc" placeholder="Your feedback ...."></textarea>
                 <input type="submit" value="Submit" name="submit">
             </form>
         </div>
@@ -177,24 +72,7 @@
         </div>
     </div>
 
-    <div class="terms-conditions">
-        <div class="terms">
-            <h1 id="terms">Terms</h1>
-            <a href="privacyPolicy.php" class="privacyPolicy">Privacy Policy</a>
-            <a href="termsCondition.php" class="privacyPolicy">Terms and Conditions</a>
-        </div>
-        <h2 id="logo" class="logoE">fEmployee</h2>
-
-        <div>
-            <p class="copyright">
-                fEmployee is a registered trademark of Freelancer Technology Pty Limited
-            </p>
-        </div>
-        <div>
-            <p class="copyright">
-                Copyright &copy; 2022 Freelancer Technology Pty Limited
-            </p>
-        </div>
+    <?php include "footer.html" ?>
 </body>
 <script src="script.js"></script>
 <script>

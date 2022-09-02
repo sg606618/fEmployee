@@ -16,7 +16,8 @@ header ul li{
 .wrapper{
   display: flex;
   flex-direction: column;
-  padding: 1rem 20% 1rem 5%;
+  padding: 1rem 5%;
+  transition: 1s opacity;
 }
 .user{
   display: flex;
@@ -115,7 +116,7 @@ textarea{
 .exp{
   margin-bottom: 30px;
 }
-input[type="submit"]{
+input[type="button"]{
   margin: auto;
   width: 200px;
   border: none;
@@ -126,7 +127,7 @@ input[type="submit"]{
   color: white;
 
 }
-input[type="submit"]:hover{
+input[type="button"]:hover{
   background: rgb(36, 36, 191);
   cursor: pointer;
 }

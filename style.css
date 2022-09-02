@@ -26,9 +26,8 @@ a{
     font-family: 'Mochiy Pop P One', sans-serif;
     cursor: pointer;
     box-shadow: 6px 4px 2px burlywood;
-    padding: 0px;
     height: min-content;
-    font-size: clamp(14px, 5vw, 25px);
+    font-size: clamp(14px, 3vw, 20px);
 }
 #logo:hover{
     box-shadow: 7px 5px 3px rgb(223, 180, 124);
@@ -75,8 +74,8 @@ nav{
 
 #threeLine{
     display: none;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     cursor: pointer; 
 }
 ul li a{
@@ -127,12 +126,13 @@ section ul{
     padding: 20px;
     height: 100%;
     padding-top: 50px;
-    display: none;
-    position: absolute;
+    display: block;
+    position: fixed;
     background: whitesmoke;
-    top: 0%;
+    top: 0;
+    left: -100%;
     z-index: 12;
-    animation: left-to-right .3s ease-in forwards;
+    transition: 1s left ease-in-out;
 }
 #profile1{
     width: 40px;
@@ -149,14 +149,6 @@ section .section-images{
     width: 20px;
     height: 20px;
 }
-@keyframes left-to-right{
-    0%{
-        transform: translateX(-50%);
-    }
-    100%{
-        transform: translateX(0%);
-    }
-}
 
 
 /* Media Queries */
@@ -171,12 +163,6 @@ section .section-images{
         padding: 0;
     }
 }
-@media (min-width: 401px){
-    #menus{
-        display: none;
-    }
-}
-
 #profile2{
     width: 2rem;    
     height: 2rem;
