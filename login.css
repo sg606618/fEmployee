@@ -7,7 +7,7 @@ body{
   width: 100vw;
 }
 #formWrapper form{
-  width: max-content;
+  width: 30%;
 }
 #imageWrapper{
   background: white;
@@ -15,8 +15,10 @@ body{
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  width: 45rem;
   position: absolute;
   left: 0;
+  top: 0;
   transition: 1s all ease-in-out;
 }
 
@@ -30,10 +32,25 @@ body{
 .h-custom {
   height: calc(100% - 73px);
 }
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .h-custom {
     height: 100%;
   }
+  #formWrapper{
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #formWrapper form{
+    margin: 20px 0;
+    width: 100%;
+  }
+  body{
+    overflow: auto;
+  }
+  #imageWrapper{
+    top: 0%;
+    height: 35rem;
+  }  
 }
 
 #select{

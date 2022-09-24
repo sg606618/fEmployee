@@ -13,6 +13,7 @@
                 if(password_verify($pass, $row['password'])){
                     echo "<script>alert('Login successfull !!!');</script>";
                     header('location: admin.php');
+                    $_SESSION['admin'] = $row['username'];
                 }
             }
         }

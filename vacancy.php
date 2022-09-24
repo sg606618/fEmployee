@@ -86,9 +86,14 @@
                 <div class="description">
                     <textarea disabled name="description" id="description" rows="10" disabled>' . $rows['Description'] . '</textarea>
                 </div>
-                <a href="mailto: '.$rows['Email'].'">
-                    <input type="button" id="button" value="Contact">
-                </a>
+                <div class="buttons">
+                    <a class="msg" href="job.php?var='.$rows['S.N.'].'">
+                        <input type="button" class="message" value="Info">
+                    </a>
+                    <a class="msg" href="apply.php?var='.$rows['S.N.'].'">
+                        <input type="button" class="message" value="Apply">
+                    </a>
+                </div>
             </div>';
             ?>
         <?php   

@@ -28,15 +28,10 @@
                     $_SESSION['skill'] = $row['Skill'];
                     $_SESSION['phone'] = $row['Phone'];
                     $_SESSION['exp'] = $row['Experience'];
-                    $_SESSION['work'] = $row['Working Hours'];
-                    $_SESSION['lang'] = $row['Language'];
                     $_SESSION['desc'] = $row['Description'];
                     $_SESSION['photo'] = $row['Photo'];
                     $_SESSION['email'] = $row['Email'];
-                    $_SESSION['cash'] = $row['Cash'];
                     $_SESSION['password'] = $row['Password'];
-                    $_SESSION['portfolio'] = $row['Portfolio'];
-                    $_SESSION['link'] = $row['Link'];
 
                 }else{
                     echo "<script>alert('Password Incorrect !!!');</script>";

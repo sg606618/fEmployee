@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     margin: 2rem auto;
+    max-width: 500px;
 }
 .container form{
     display: flex;
@@ -36,10 +37,9 @@
     text-align: center;
 }
 .container form small {
-    margin-left: auto;
     color: grey;
     font-size: 12px;
-    margin-bottom: 1rem;
+    margin: .5rem 0 1rem auto;
 }
 .container form p{
     color: black;
@@ -62,4 +62,8 @@
     outline: 1px solid black;
     background: rgb(80, 80, 80);
     transform: scale(1.001);
+}
+.container form a{
+    width: fit-content;
+    margin: auto;
 }

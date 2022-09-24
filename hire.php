@@ -35,7 +35,7 @@
             <?php
                 $search = $_POST['search'];
                 if(!$search == ''){
-                    $sql = "SELECT * FROM registration WHERE `Address` LIKE '%$search%' ORDER BY `S.N.` DESC";
+                    $sql = "SELECT * FROM registration WHERE `Skill` LIKE '%$search%' ORDER BY `S.N.` DESC";
                     $result = mysqli_query($conn, $sql);
                     if(!$result){
                         die ("Error in Selecting Database , <br> Please check!!!");
@@ -54,14 +54,14 @@
                 <a href="index.php">
                     <img src="images/back_button.png" alt="" id="back_sign">
                 </a>
-                <input type="search" name="search" placeholder="Search your nearest location ..." id="search">
+                <input type="search" name="search" placeholder="Search for skill you need ..." id="search">
                 <input type="hidden" value="" name="submit" style="display: none;">
                 <button type="submit"><i class="fa fa-search fa-2x" id="search-icon"></i></button>
             </form>
         </div>
         <hr>
     </div>
-    <div class="information">
+    <div class="information" style="padding: 0 10%">
         <?php
             $num = mysqli_num_rows($result);
             // echo $num;
@@ -90,15 +90,17 @@
                 <div class="description">
                     <textarea name="desc" id="desc" disabled><?php echo $row['Description'] ?></textarea>
                 </div>
-                <a id="msg" href="mailto: <?php echo $row['Email'] ?>">
-                    <input type="button" value="Direct Mail" id="message">
-                </a>
+                <div class="buttons">
+                    <a class="msg" href="<?php echo $row['cv']; ?>" download>
+                        <input type="button" class="message" value="Download CV">
+                    </a>
+                </div>
             </div>
         </div>
         <?php
                 }
             }else{
-                echo "<p style='font-size: 20px; color: red;'>This location isn't available here!!!<br> Try another nearby location...</p>";
+                echo "<p style='font-size: 20px; color: red;'>No such skill found... Try another!!!</p>";
             }
             mysqli_close($conn);
         ?>

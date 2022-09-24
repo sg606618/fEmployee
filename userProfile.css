@@ -90,6 +90,7 @@ textarea{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: max-content;
 }
 .working-history{
     font-weight: 700;
@@ -97,56 +98,31 @@ textarea{
     justify-content: center;
 }
 .company{
-    margin: 20px 0;
-    border: 1px solid wheat;
-    width: 70%;
-    padding: 20px 10px;
-}
-
-
-.portfolio{
-    display: grid;
-    gap: 10px;
-    grid-template-columns: auto;
-}
-.add-port{
-    margin-left: 2vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin: 20px auto;
+    width: 70%;
+    padding: 10px;
 }
-.plus-icon{
-    width: clamp(100px, 15vw, 200px);
-    height: clamp(100px, 15vw, 200px);
+.company a{
+    width: fit-content;
+    margin-left: auto;
 }
-#inputFile[type="file"]{
-    color: transparent;
-}
-.image-upload label img{
+.company a input[type= 'button']{
+    padding: 5px 10px;
+    font-size: 14px;
     cursor: pointer;
+    margin: auto;
+    background: green;
+    color: white;
+    border: none;
+    border-radius: 10px;
 }
-.image-upload>input {
-    display: none;
+.company a input[type = 'button']:hover{
+    color: black;
+    background: greenyellow;
 }
-#output{
-    width: 100%;
-    height: 300px;
-    margin-bottom: 20px;
-    display: none;
-}
-#portImage{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 10px;
-    width: 100%;
-    height: fit-content;
-    place-items: center;
-}
-#portImage a > img{
-    height: 200px;
-    border-radius: 0px;
-    margin-bottom: 20px;
-}
+
 strong{
     font-size: clamp(14px ,3vw, 18px);
 }

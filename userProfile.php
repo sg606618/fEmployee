@@ -16,15 +16,14 @@
         $add = $_POST['address'];
         $sk = $_POST['skill'];
         $ph = $_POST['phone'];
-        $wh = $_POST['wh'];
         $des = $_POST['desc'];
-        if($nam == '' || $add == '' || $sk == '' || $ph == '' || $wh == '' || $des == ''){
+        if($nam == '' || $add == '' || $sk == '' || $ph == '' || $des == ''){
             echo "<script>alert('You have to fill the blank areas to submit ...')</script>";
         }else{
             if($fileerror == 0){
                 $destfile = 'imagefolder/'. $filename;
                 move_uploaded_file($filepath, $destfile);
-                $sql = "UPDATE `registration` SET `Name`='$nam',`Address`='$add', `Skill`='$sk',`Phone`='$ph',`Description`='$des', `Working Hours`='$wh', `Photo`='$destfile' WHERE `Email` = '$mail'";
+                $sql = "UPDATE `registration` SET `Name`='$nam',`Address`='$add', `Skill`='$sk',`Phone`='$ph',`Description`='$des', `Photo`='$destfile' WHERE `Email` = '$mail'";
                 $result = mysqli_query($conn, $sql);
                 if(!$result){
                     echo "error in updating ...";
@@ -38,7 +37,6 @@
                         $_SESSION['address'] = $rows['Address'];
                         $_SESSION['skill'] = $rows['Skill'];
                         $_SESSION['phone'] = $rows['Phone'];
-                        $_SESSION['work'] = $rows['Working Hours'];
                         $_SESSION['desc'] = $rows['Description'];
                         $_SESSION['photo'] = $rows['Photo'];
                     }
@@ -97,13 +95,9 @@
             <input type="text" name="phone" id="phone"><br>
             <label for="">Skills :</label> <br>
             <input type="text" name="skill" id="skill"><br>
-            <label for="">Working Hours :</label> <br>
-            <input type="number" name="wh" id="wh"><br>
             <label for="">About :</label> <br>
             <textarea name="desc" id="desc" placeholder="Edit your bio ..."></textarea><br>
             <input type="file" name="photo" id="photo" value="Choose a valid Photo..."><br><br>
-            <!-- <label for="">Password :</label> <br>
-            <input type="password" name="pass" id="pass" placeholder="Enter your valid password..."><br> -->
             <input type="submit" value="Change" name="submit">
         </form>
     </div>
@@ -172,25 +166,34 @@
         <hr>
         <fieldset class="workingHistory">
             <h2 style="text-decoration: underline;" class="working-history">Applied History</h2><br>
+            <?php 
+                $mail = $_SESSION['email'];
+                $select = "SELECT * FROM `application` WHERE `userEmail` = '$mail'";
+                $out = mysqli_query($conn, $select);
+                if(!$out){
+                    echo "error occur";
+                }
+                $n = mysqli_num_rows($out);
+                if($n){
+                    while ($row = mysqli_fetch_assoc($out)) {
+            ?>
             <div class="company">
-                <strong for="">AAA Company Ltd.</strong>
-                <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
-                    to change the logo in a new design</p>
+                <strong style="color: green; font-size: 18px;"><?php echo $row['job']; ?></strong>
+                <strong style="color: red; font-size: 16px;"><?php echo $row['company']; ?></strong>
+                <small><?php echo $row['contact']; ?> || <?php echo $row['email']; ?></small>
+                <small><?php echo $row['compAddress']; ?></small>
+                <p><?php echo $row['description']; ?></p>
+                <a class="confirmation" href="deleteapp.php?sn=<?php echo $row['id'] ?>">
+                    <input type="button" value="Delete">
+                </a>
             </div>
-            <div class="company">
-                <strong for="">AAA Company Ltd.</strong>
-                <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
-                    to change the logo in a new design</p>
-                </div>
-                <div class="company">
-                <strong for="">AAA Company Ltd.</strong>
-                <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
-                    to change the logo in a new design</p>
-            </div>
+            <?php 
+                    }
+                }
+            ?>
         </fieldset>
         <hr>
     </div>
-
     <?php include "footer.html" ?>
     
 </body>
@@ -229,5 +232,13 @@
             header('location:login.php');
         }
     ?>  
-
+    <script>
+        var elems = document.getElementsByClassName('confirmation');
+        var confirmIt = function (e) {
+            if (!confirm('Are you sure?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
+    </script>
 </html>

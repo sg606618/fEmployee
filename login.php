@@ -141,12 +141,23 @@
 </body>
 <script>
     document.getElementById('swipe').addEventListener('click', ()=>{
-        if(document.getElementById('imageWrapper').style.left === '0%'){
-            document.getElementById('imageWrapper').style.left = '50%';
-            document.getElementById('swipe').value = 'JobSeeker';
+        const mediaQuery = window.matchMedia('(max-width: 500px)')
+        if (mediaQuery.matches) {
+            if(document.getElementById('imageWrapper').style.top === '0%'){
+                document.getElementById('imageWrapper').style.top = '35rem';
+                document.getElementById('swipe').value = 'JobSeeker';
+            }else{
+                document.getElementById('imageWrapper').style.top = '0%';
+                document.getElementById('swipe').value = 'Employer';
+            }
         }else{
-            document.getElementById('imageWrapper').style.left = '0%';
-            document.getElementById('swipe').value = 'Employer';
+            if(document.getElementById('imageWrapper').style.left === '0%'){
+                document.getElementById('imageWrapper').style.left = '50%';
+                document.getElementById('swipe').value = 'JobSeeker';
+            }else{
+                document.getElementById('imageWrapper').style.left = '0%';
+                document.getElementById('swipe').value = 'Employer';
+            }
         }
     });
 </script>

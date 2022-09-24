@@ -1,9 +1,9 @@
 <?php 
     require_once("connectDatabase.php");
            
-	$var = $_GET['var'];
-    $sql = "DELETE FROM `registration` WHERE `S.N.` = '$var'";
-	$result = mysqli_query($conn, $sql);
+    $sn = $_GET['sn'];
+    $sql = "DELETE FROM `application` WHERE `id` = '$sn'";
+    $result = mysqli_query($conn, $sql);
     if(!$result){
         echo "error occur";
     }else{

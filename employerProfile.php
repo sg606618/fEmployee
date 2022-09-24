@@ -1,5 +1,6 @@
 <?php
-    session_start();
+    // session_start();
+    include 'loginOrNot.php';
     require_once("connectDatabase.php");
 ?>
 
@@ -59,79 +60,92 @@
         <fieldset class="user">
             <img src="" onerror='this.src="images/profile.png";' id="profile" alt="">
             <div class="data">
-                <a><label for="" id="name"></label></a>
-                <label for="" id="address"></label>
-                <label for="" id="skill"></label>
+                <a><label for="" id="name"><?php echo $_SESSION['username']; ?></label></a>
+                <label for="" id="skill"><?php echo $_SESSION['organization']; ?></label>
+                <label for="" id="address"><?php echo $_SESSION['address']; ?></label>
             </div>
         </fieldset>
         
         <hr>
         <fieldset class="skill">
-            <div class="skillName">
-                <label for="">
-                    <!-- <img class="edit" style="height: 30px; width: 30px; float: right;" src="images/edit.png" alt=""> -->
-                </label>
-                
-            </div>
             <div class="skillDesc">
-                <h2 style="float: left; text-decoration: underline; margin: 10px;">User Description</h2>
-                <textarea name="" id="desc" disabled></textarea>
+                <h2 style="float: left; text-decoration: underline; margin: 10px;">About Organization</h2>
+                <textarea name="" id="desc" disabled><?php echo $_SESSION['description']; ?></textarea>
             </div>
         </fieldset>
         <hr>
         <fieldset class="workingHistory">
-            <h2 style="text-decoration: underline;" class="working-history">Working History</h2><br>
+            <h2 style="text-decoration: underline;" class="working-history">Applicants</h2><br>
+            <?php 
+                $mail = $_SESSION['email'];
+                $select = "SELECT * FROM `application` WHERE `email` = '$mail'";
+                $out = mysqli_query($conn, $select);
+                if(!$out){
+                    echo "error occur";
+                }
+                $n = mysqli_num_rows($out);
+                if($n){
+                    while ($row = mysqli_fetch_assoc($out)) {
+            ?>
             <div class="company">
-                <strong for="">AAA Company Ltd.</strong>
-                <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
-                    to change the logo in a new design</p>
+                <a id="msg" href="individual.php?mail=<?php echo $row["userEmail"]; ?>">
+                    <strong style="color: green; font-size: 18px;"><?php echo $row['name']; ?></strong>
+                </a>
+                <strong style="color: red; font-size: 16px;"><?php echo $row['skill']; ?></strong>
+                <small><?php echo $row['phone']; ?> || <?php echo $row['userEmail']; ?></small>
+                <small><?php echo $row['compAddress']; ?></small>
+                <p><?php echo $row['userDesc']; ?></p>
+                <a class="confirmation" href="deleteapp.php?sn=<?php echo $row['id'] ?>">
+                    <input type="button" value="Delete">
+                </a>
             </div>
+            <?php 
+                    }
+                }
+            ?>
+        </fieldset>
+        <fieldset class="workingHistory">
+            <h2 style="text-decoration: underline;" class="working-history">Your Vacancies</h2><br>
+            <?php 
+                $mail = $_SESSION['email'];
+                $select = "SELECT * FROM `openvacancy` WHERE `Email` = '$mail'";
+                $out = mysqli_query($conn, $select);
+                if(!$out){
+                    echo "error occur";
+                }
+                $n = mysqli_num_rows($out);
+                if($n){
+                    while ($row = mysqli_fetch_assoc($out)) {
+            ?>
             <div class="company">
-                <strong for="">AAA Company Ltd.</strong>
-                <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
-                    to change the logo in a new design</p>
-                </div>
-                <div class="company">
-                <strong for="">AAA Company Ltd.</strong>
-                <p>This is the project to make a logo for our company. We use the previous logo for a years and we want
-                    to change the logo in a new design</p>
+                <strong style="color: green; font-size: 18px;"><?php echo $row['Job Title']; ?></strong>
+                <strong style="color: red; font-size: 16px;"><?php echo $row['Company']; ?></strong>
+                <small><?php echo $row['Contact']; ?> || <?php echo $row['Email']; ?></small>
+                <small><?php echo $row['Address']; ?></small>
+                <p><?php echo $row['Description']; ?></p>
+                <a class="confirmation" href="deleteop.php?op=<?php echo $row['S.N.'] ?>">
+                    <input type="button" value="Delete">
+                </a>
             </div>
-        </fieldset>
-        <hr>
-        <fieldset class="portfolio">
-            <h1>Portfolio</h1>
-            <div class="add-port">
-
-                <div class="image-upload">
-                    <label for="file-input" id="inputFile">
-                        <img src="images/plus-icon.png" class="plus-icon" height=' 100vw' width='100vw' />
-                    </label><br>
-                    <input id="file-input" type="file" name="image" onchange="loadFile(event)" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.html, .jpg, .jpeg, .png, .svg" />
-                </div>
-                <div id="output" class="output">
-                    <img src="images/employee.png" alt="">
-                    This is an apple
-                </div>
-
-                <label for="" style="color: orange; font-size: clamp(10px, 3vw, 15px);">ShowCase your work to win more projects. Add items to impress clients.</label>
-            </div>
-        </fieldset>
-        <hr>
-        <fieldset class="hrs">
-            <h2>Working Hours</h2>
-            <p>More than  hrs a day</p>
-        </fieldset>
-        <hr>
-        <fieldset class="languages">
-            <h2>Language Skills</h2>
-            <p class="langu"></p>
+            <?php 
+                    }
+                }
+            ?>
         </fieldset>
     </div>
 
     <?php include "footer.html" ?>
     
 </body>
-
+<script>
+     var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 <script src="script.js"></script>
 
 </html>

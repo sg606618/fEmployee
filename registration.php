@@ -13,16 +13,31 @@
         $filepath = $file['tmp_name'];
         $fileerror = $file['error'];
 
-        $fname =  $_POST['fname'];
-        $add = $_POST['address'];
-        $gen = $_POST['gender'];
-        $skill = $_POST['skill'];
-        $phone = $_POST['phone'];
-        $exp = $_POST['exp'];
-        $desc = $_POST['desc'];
-        $email = $_POST['email'];
-        $pass = $_POST['password'];
-        $repassword = $_POST['repassword'];
+
+        // For image upload
+        $cv = $_FILES['cv'];
+        // print_r($file);
+        $cvname = $cv['name'];
+        $cvpath = $cv['tmp_name'];
+        $cverror = $cv['error'];
+
+        $fname =  mysqli_real_escape_string($conn,$_POST['fname']);
+        $add = mysqli_real_escape_string($conn,$_POST['address']);
+        $gen = mysqli_real_escape_string($conn,$_POST['gender']);
+        $skill = mysqli_real_escape_string($conn,$_POST['skill']);
+        $phone = mysqli_real_escape_string($conn,$_POST['phone']);
+        $exp = mysqli_real_escape_string($conn,$_POST['exp']);
+        $desc = mysqli_real_escape_string($conn,$_POST['desc']);
+        $email = mysqli_real_escape_string($conn,$_POST['email']);
+        $pass = mysqli_real_escape_string($conn,$_POST['password']);
+        $repassword = mysqli_real_escape_string($conn,$_POST['repassword']);
+
+        // Validating password
+        $number = preg_match('@[0-9]@', $password);
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $specialChars = preg_match('@[^\w]@', $password);
+        
 
             
         if (is_uploaded_file($_FILES['image']['tmp_name'])) {
@@ -59,10 +74,14 @@
                     $destfile = 'imagefolder/'. $filename;
                     // echo $destfile;
                     move_uploaded_file($filepath, $destfile);
+                    
+                    $cvfile = 'cvfolder/'.$cvname;
+                    // echo $cvfile;
+                    move_uploaded_file($cvpath, $cvfile);
         
                     if(!($fname == '' || $add == '' || $skill == '' || $exp == '' || $desc == '' || $email == '' || $pass == '' || $phone == '')){
                         if($pass == $repassword){
-                            $sql = "INSERT INTO `registration` (`Name`, `Address`, `Gender`, `Skill`, `Phone`, `Experience`, `Description`, `Photo`, `Email`, `Password`) VALUES ('$fname', '$add', '$gen', '$skill', '$phone', '$exp', '$desc', '$destfile', '$email', '$hash_pass')";
+                            $sql = "INSERT INTO `registration` (`Name`, `Address`, `Gender`, `Skill`, `Phone`, `Experience`, `Description`, `Photo`, `Email`, `Password`, `cv`) VALUES ('$fname', '$add', '$gen', '$skill', '$phone', '$exp', '$desc', '$destfile', '$email', '$hash_pass', '$cvfile')";
                             $result = mysqli_query($conn, $sql);
                             if($result){
                                 echo "inserted";

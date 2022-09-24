@@ -69,7 +69,7 @@
         <div class="informations">
             <div class="information">
                 <?php 
-                    $sql = "SELECT * FROM registration ORDER BY `S.N.` DESC";
+                    $sql = "SELECT * FROM registration ORDER BY `S.N.` DESC LIMIT 7";
                     $result = mysqli_query($conn, $sql);
                     if(!$result){
                         echo ("<h1 style='color: red; font-weight: 500;'>There is not any user Registered yet.!!!</h1>");
@@ -102,14 +102,14 @@
                                         <div class="description">
                                             <textarea name="desc" id="desc" style="border: none;" disabled>' .$row["Description"]. '</textarea>
                                         </div>
-                                        <a id="msg" href="mailto: ' .$row["Email"] .'">
-                                            <input type="button" value="Direct Mail" id="message">
+                                        <a id="msg" href="individual.php?var=' .$row["S.N."] .'">
+                                            <input type="button" class="message" value="Info" id="message">
                                         </a>
                                     </div>
                                 </div>';
                             }
                             if($loggedin){
-                                $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC";
+                                $sql = "SELECT * FROM openvacancy ORDER BY `S.N.` DESC LIMIT 7";
                                 $result = mysqli_query($conn, $sql);
                                 if(!$result){
                                     echo ("<h1 style='color: red; font-weight: 500;'>Wait for Organizer Vacancies to be Opened...!!!</h1>");
@@ -142,8 +142,8 @@
                                             <div class="vacancy_description">
                                                 <textarea disabled name="description" id="description" rows="10" disabled>' . $row['Description'] . '</textarea>
                                             </div>
-                                            <a href="mailto: '.$row['Email'].'">
-                                                <input type="button" id="button" value="Contact">
+                                            <a id="msg" href="job.php?var=' .$row["S.N."] .'">
+                                                <input type="button" class="message" value="Info" id="message">
                                             </a>
                                         </div>';
                                     }

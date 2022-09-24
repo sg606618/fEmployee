@@ -4,16 +4,17 @@
   padding: 0;
 }
 body{
+  height: 100vh;
+  width: 100vw;
   background: none;
-}
-
-header ul li{
-  font-size: clamp(10px, 3vw, 16px);
-  margin-right: 0vw;
-  background: #105E26;
+  display: grid;
+  justify-content: center;
 }
 
 .wrapper{
+  max-width: 700px;
+  width: fit-content;
+  height: min-content;
   display: flex;
   flex-direction: column;
   padding: 1rem 5%;
@@ -21,24 +22,25 @@ header ul li{
 }
 .user{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 .userInfo{
-  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   width: fit-content;
+  order: 2;
 }
 .pro{
-  width: 10vw;
-  min-width: 60px;
-  max-width: 100px;
-  height: 10vw;
-  min-height: 60px;
-  max-height: 100px;
+  order: 1;
+  margin: 20px auto;
+  width: 70px;
+  min-width: 1rem;
+  max-width: 5rem;
+  height: 70px;
+  min-height: 1rem;
+  max-height: 5rem;
   border-radius: 50%;
-  margin-right: 4vw;
 }
 .userName{
   font-size: clamp(14px, 4vw, 25px);
@@ -49,7 +51,7 @@ header ul li{
 .userAddress, .company, .exp{
   font-size: clamp(12px, 3vw, 16px);
 }
-.expe, .work, .portfolio, .desc{
+.work, .desc, .exp{
   text-decoration: underline;
   font-size: clamp(14px, 4vw, 18px);
   color: darkgreen;
@@ -58,32 +60,12 @@ header ul li{
   font-size: clamp(14px, 4vw, 18px);
   color: darkgreen;
 }
-.userDet, .wh{
+.userDet, .wh, .expe{
   font-size: clamp(11px, 3vw, 14px);
   color: grey;
 }
 .star{
   width: 100px;
-}
-.userPortfolio{
-  display: flex;
-  flex-direction: column;
-  margin: 40px 0px;
-}
-.imgport{
-  width: 250px;
-}
-.portimg{
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin: 20px 0;
-}
-.userPortfolio a{
-  text-decoration: none;
-  color: rgb(50, 50, 248);
-  margin-top: 5px;
-  width: fit-content;
 }
 .description{
   display: flex;
@@ -101,35 +83,43 @@ textarea{
   background: none;
   border: none;
 }
-.work{
+.experience{
   margin: 10px 0;
 }
-.company{
+.experience .exp{
   font-weight: 600;
 }
-.wh{
-  margin-bottom: 20px;
+
+.msg{
+  display: flex;
+  justify-content: center;
 }
-.expe{
-  margin-top: 20px;
-}
-.exp{
-  margin-bottom: 30px;
-}
-input[type="button"]{
+.wrapper .msg input[type="button"]{
   margin: auto;
-  width: 200px;
   border: none;
   border-radius: 10px;
   background-color: blue;
-  padding: 10px;
+  padding: .25rem 2rem;
   font-size: clamp(16px, 3vw, 20px);
   color: white;
-
 }
-input[type="button"]:hover{
+.wrapper .msg input[type="button"]:hover{
   background: rgb(36, 36, 191);
   cursor: pointer;
+}
+.wrapper .msge input[type="button"]{
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  background: green;
+  text-shadow: 1px 1px 1px black;
+  padding: .12rem;
+  margin-bottom: 20px;
+}
+.wrapper .msge input[type="button"]:hover{
+  cursor: pointer;
+  background: greenyellow;
+  color: black;
 }
 
 @media (max-width:400px){

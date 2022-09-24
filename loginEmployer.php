@@ -23,6 +23,9 @@
                         header ("location: index.php");
                     }
                     $_SESSION['username'] = $row['username'];
+                    $_SESSION['organization'] = $row['organization'];
+                    $_SESSION['description'] = $row['description'];
+                    $_SESSION['address'] = $row['address'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['password'] = $row['password'];
 

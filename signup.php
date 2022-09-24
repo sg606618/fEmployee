@@ -3,13 +3,13 @@
 <?php include 'connectDatabase.php';?>
 <?php
     if(isset($_POST['submit'])){
-        $username =  $_POST['username'];
-        $organization =  $_POST['organization'];
-        $address =  $_POST['address'];
-        $desc =  $_POST['desc'];
-        $email = $_POST['email'];
-        $pass = $_POST['password'];
-        $repassword = $_POST['repassword'];
+        $username =  mysqli_real_escape_string($conn, $_POST['username']);
+        $organization =  mysqli_real_escape_string($conn, $_POST['organization']);
+        $address =  mysqli_real_escape_string($conn, $_POST['address']);
+        $desc =  mysqli_real_escape_string($conn, $_POST['desc']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $pass = mysqli_real_escape_string($conn, $_POST['password']);
+        $repassword = mysqli_real_escape_string($conn, $_POST['repassword']);
         $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
         $query = 'SELECT * FROM register';

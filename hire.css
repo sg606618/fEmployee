@@ -88,14 +88,14 @@ h3{
 /* Main informations about the workers */
 .information{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(18rem,1fr));
     gap: 15px;
     margin: 20px 0;
-    padding: 0 10%;
+    padding: 0;
     width: 100%;
 }
 .contentinfo{
-    width: 22rem;
+    width: 20rem;
     height: max-content;
     border-radius: 10px;
     background: rgb(70, 130, 210);
@@ -188,10 +188,16 @@ textarea{
 }
 
 /* message button */
-#msg{
+.buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.buttons .msg{
     width: 100%;
 }
-#message{
+.message{
     width: 100%;
     padding: 5px;
     font-size: clamp(12px, 3vw, 15px);
@@ -201,7 +207,7 @@ textarea{
     background: lightcyan;
     border: 3px solid black;
 }
-#message:hover{
+.message:hover{
     opacity: .7;
 }
 

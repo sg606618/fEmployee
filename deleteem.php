@@ -10,7 +10,7 @@
         ?>
         <script>
             alert('Recorded Deleted!!!');
-            location.replace("admin.php");
+            history.back();
         </script>
 <?php
     }

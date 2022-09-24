@@ -1,9 +1,14 @@
 <?php include 'connectDatabase.php' ?>
 <?php
-    // include "loginOrNot.php";
 
-	$mail = $_GET['var'];
-	$sql = "select * from registration where `Email` = '$mail'";
+	if(isset($_GET['var'])){
+		$var = $_GET['var'];
+		$sql = "SELECT * FROM registration WHERE `S.N.` = '$var'";
+	}
+	if(isset($_GET['mail'])){
+		$mail = $_GET['mail'];
+		$sql = "SELECT * FROM registration WHERE Email = '$mail'";
+	}
 	$result = mysqli_query($conn, $sql);
 	if(!$result){
 		echo "error occur";
@@ -29,39 +34,6 @@
 </head>
 
 <body>
-	<header>
-		<h2 id="logo" onclick="window.location = 'index.php'">fEmployee</h2>
-		<ul>
-			
-		</ul>
-	</header>
-
-	<nav id="nav">
-		<ul>
-			<img src="images/ThreeLineDot.png" alt="" id="threeLine" onclick="displayThreeLine()" />
-			<!-- <a href="userProfile.php">
-					<img src="images/profile.png" id="profile2" alt="">
-				</a> -->
-			<li><a href="index.php">Home</a></li>
-			<li><a href="vacancy.php">Find Vacancies</a></li>
-			<li><a href="about.php">About</a></li>
-		</ul>
-		<a href="contact.php"><button id="contact_btn">Contact</button></a>
-	</nav>
-	<section id="menus">
-		<ul>
-			<!-- <a href="userProfile.php">
-					<img src="images/profile.png" id="profile1" alt="">
-				</a> -->
-			<li><a href="index.php">Home</a></li>
-			<li><a href="vacancy.php">Find Vacancies</a></li>
-			<li><a href="about.php">About</a></li>
-			<li onclick="hideThreeLine()"><a>Exit</a></li>
-		</ul>
-		<img class="section-images" src="images/facebook-icon.png" alt="">
-		<img class="section-images" src="images/instagram-icon.png" alt="">
-		<img class="section-images" src="images/twitter-icon.png" alt="">
-	</section>
 
 	<div class="wrapper">
 		<div class="user">
@@ -87,32 +59,16 @@
 			<label class="desc" for="desc">About</label>
 			<textarea name="desc" id="desc" disabled><?php echo $row['Description']; ?></textarea>
 		</div>
-		<div class="userPortfolio">
-			<h3 class="portfolio">Portfolio (ScreenShots)</h3>
-			<div class="portimg">
-				<img class="imgport" src="images/userPortfolio.jpg" alt="">
-				<img class="imgport" src="images/userPortfolio.jpg" alt="">
-				<img class="imgport" src="images/userPortfolio.jpg" alt="">
-			</div>
-			<h3 style="margin-top: 20px;" class="portfolio">Project Links</h3>
-			<a href="https:\\www.userprofile.com">My Profile</a>
-			<a href="https:\\www.femployee.com">fEmployee</a>
+		<div class="experience">
+			<label class="exp" for="exp">Experience</label>
+			<p class="expe" name="exp"><?php echo $row['Experience']; ?></p>
 		</div>
-		<h3 class="work">Working History</h3>
-		<div class="workingHistory">
-			<h4 class="company">AAA Company Ltd.</h4>
-			<p class="wh">This is the project to make a logo for our company. We use the previous logo for a years and
-				we want to change the logo in a new design.</p>
-			<h4 class="company">AAA Company Ltd.</h4>
-			<p class="wh">This is the project to make a logo for our company. We use the previous logo for a years and
-				we want to change the logo in a new design.</p>
-			<h4 class="company">AAA Company Ltd.</h4>
-			<p class="wh">This is the project to make a logo for our company. We use the previous logo for a years and
-				we want to change the logo in a new design.</p>
+		<div class="experience">
+			<a class="msge" href="<?php echo $row['cv']; ?>" download>
+				<input type="button" class="message" value="Download CV">
+			</a>
 		</div>
 	</div>
-
-	<?php include "footer.html" ?> 
 	<?php 
 	$val = $row['Email'];
 			}

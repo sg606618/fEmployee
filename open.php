@@ -1,7 +1,18 @@
-<?php include 'connectDatabase.php';?>
+<?php
+    // session_start();
+    require_once('connectDatabase.php');
+?>
 
 <?php
     include "loginOrNot.php";
+    if(isset($_SESSION['username']) || isset($_SESSION['admin'])){
+
+    }else{
+        echo '<script>
+            alert("You are in user mode you have to login as a admin or employer id to add vacancy...");
+            history.back();
+        </script>';
+    }
 
     if(isset($_POST['submit'])){
 
@@ -14,12 +25,9 @@
         $desc = mysqli_real_escape_string($conn, $_POST['desc']);
         // $desc = str_replace("'", "\'", "$desc");
 
-        if($Jtit == '' || $comp == '' || $cont == '' || $email == '' || $add == '' || $desc == ''){
-            echo ("<script>alert('Please Fill all the boxes and try again...');</script>");
+        if($Jtit == '' || $comp == '' || $cont == '' || $add == '' || $desc == ''){
+            echo ("<script>alert('Please Fill all the boxes and try again...');history.back();</script>");
         ?>
-        <script>
-            location.replace('open.php');
-        </script>
         <?php
         }else{
             $sql = "INSERT INTO `openvacancy` (`Job Title`, `Company`, `Contact`, `Email`, `Expiry Date`, `Address`, `Description`) VALUES ('$Jtit', '$comp', '$cont', '$email', '$expd', '$add', '$desc')";
@@ -28,10 +36,10 @@
             if(!$result){
                 echo "Data can't inserted !!!";
             }
-            header("location: vacancy.php");
+            header("location: employerProfile.php");
         }
         // DELETE FROM jos_jomres_gdpr_optins WHERE `date_time` < '2020-10-21 08:21:22';
-        mysqli_close($conn);
+        // mysqli_close($conn);
 
     }
 ?>
@@ -91,9 +99,8 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-4 pb-2">
                                         <div class="form-outline">
-                                            <input type="email" name="email" id="email"
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="email">Email</label>
+                                            <input type="hidden" name="email" id="email" class="form-control form-control-lg" value="<?php echo $_SESSION['email']; ?>"/>
+                                            <!-- <label class="form-label" for="email">Email</label> -->
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-4 pb-2">
                                         <div class="form-outline">
-                                            <textarea type="text" name="desc" id="description" class="form-control form-control-lg" rows="5" maxlength="500" minlength="100" placeholder="Job description you offer (minimum character is 100)...."></textarea>
+                                            <textarea type="text" name="desc" id="description" class="form-control form-control-lg" rows="5" maxlength="500" minlength="50" placeholder="Job description you offer (minimum character is 50)...."></textarea>
                                             <label class="form-label" for="desc">Description</label>
                                         </div>
                                     </div>
